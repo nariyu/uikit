@@ -7,13 +7,13 @@ import {
   SyntheticEvent,
 } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { ActionSheet } from 'shared/components/actionsheet';
 import { preventDefault } from 'shared/utils/elementutil';
 import { useActionSheet } from 'states/actionsheetstate';
 import { menuState } from 'states/menustate';
 import { useNavigationControllerModal } from 'states/navigationcontrollermodalstate';
 import { themeState } from 'states/themestate';
 import { userInfoState } from 'states/userinfostate';
-import { ActionSheet } from '../shared/components/actionsheet';
 import { Button } from '../shared/components/button';
 import {
   NavigationController,
@@ -180,7 +180,7 @@ export const MainView = () => {
         >
           <NavigationController
             ref={navigationControllerModalRef}
-            defaultTitle="Modal w/ NavigationController"
+            defaultTitle="NavigationController + Modal"
             defaultLeftButton="Close"
             onClickDefaultLeftButton={hideNavigationContollerModal}
           >
@@ -218,8 +218,8 @@ export const MainView = () => {
                       <Button
                         onClick={() => {
                           showActionSheet(
-                            'actionsheet',
-                            '"ACTION SHEET"',
+                            'actionsheet2',
+                            'Pretty!',
                             <div
                               style={{
                                 padding: '1rem',
@@ -243,10 +243,12 @@ export const MainView = () => {
               ]}
             />
           </NavigationController>
+
+          <ActionSheet id="actionsheet2" />
         </div>
       </div>
 
-      <ActionSheet id="actionsheet" />
+      <ActionSheet id="actionsheet1" />
     </div>
   );
 };

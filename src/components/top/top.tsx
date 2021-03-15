@@ -1,14 +1,15 @@
-import { Config } from 'config';
 import { ReactNode, useCallback, useState } from 'react';
 import { Button } from 'shared/components/button';
 import { Modal } from 'shared/components/modal';
 import { ModalManager } from 'shared/components/modalmanager';
 import { NotificationManager } from 'shared/components/notificationmanager';
+import { useActionSheet } from 'states/actionsheetstate';
 import { useNavigationControllerModal } from 'states/navigationcontrollermodalstate';
 import { CheckBox } from '../../shared/components/checkbox';
 import styles from './top.module.scss';
 
 export const Top = () => {
+  const { showActionSheet } = useActionSheet();
   const { showNavigationControllerModal } = useNavigationControllerModal();
 
   // ナビゲーションモーダルを開く
@@ -83,7 +84,31 @@ export const Top = () => {
     <div className={styles.component}>
       <Row>
         <Button onClick={setNavigationModalType}>
-          Modal w/ NavigationController
+          NavigationController + Modal
+        </Button>
+      </Row>
+      <Row>
+        <Button
+          onClick={() => {
+            showActionSheet(
+              'actionsheet1',
+              'Wow!',
+              <div
+                style={{
+                  padding: '1rem',
+                  minHeight: '20rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '6rem',
+                }}
+              >
+                😍
+              </div>,
+            );
+          }}
+        >
+          Show ActionSheet
         </Button>
       </Row>
       <Row>
