@@ -7,13 +7,13 @@ import {
   useState,
 } from 'react';
 import { useRecoilState } from 'recoil';
-import { ModalManager } from 'shared/components/modalmanager';
+import { PopupManager } from 'shared/components/popupmanager';
 import { Spinner } from 'shared/components/spinner';
 import { classNames } from 'shared/utils/elementutil';
 import { userInfoState } from 'states/userinfostate';
 import { validateEmail } from 'validators';
-import { Modal } from '../../shared/components/modal';
 import { Submittable } from '../../shared/components/navigationcontroller';
+import { Popup } from '../../shared/components/popup';
 import { TextInput, TextInputHandler } from '../../shared/components/textinput';
 import styles from './editpage.module.scss';
 
@@ -58,7 +58,7 @@ export const EmailEdit = forwardRef(
       new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
         setLoading(false);
         setUserInfo((userInfo) => ({ ...userInfo, email }));
-        ModalManager.open(<Modal>Email is updated.</Modal>);
+        PopupManager.open(<Popup>Email is updated.</Popup>);
         onClose();
       });
     }, [onClose]);

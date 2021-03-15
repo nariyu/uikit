@@ -1,8 +1,8 @@
 import { ReactNode, useCallback, useState } from 'react';
 import { Button } from 'shared/components/button';
-import { Modal } from 'shared/components/modal';
-import { ModalManager } from 'shared/components/modalmanager';
 import { NotificationManager } from 'shared/components/notificationmanager';
+import { Popup } from 'shared/components/popup';
+import { PopupManager } from 'shared/components/popupmanager';
 import { useActionSheet } from 'states/actionsheetstate';
 import { useNavigationControllerModal } from 'states/navigationcontrollermodalstate';
 import { CheckBox } from '../../shared/components/checkbox';
@@ -19,8 +19,8 @@ export const Top = () => {
 
   // モーダルを表示する
   const openModal = useCallback(() => {
-    ModalManager.open(
-      <Modal>
+    PopupManager.open(
+      <Popup>
         <div
           style={{
             width: '17rem',
@@ -34,15 +34,15 @@ export const Top = () => {
         >
           Hello!
         </div>
-      </Modal>,
+      </Popup>,
       true,
     );
   }, []);
 
   // モーダルを表示する
   const openModal2 = useCallback(() => {
-    ModalManager.open(
-      <Modal
+    PopupManager.open(
+      <Popup
         buttons={[
           {
             label: 'Tea',
@@ -68,7 +68,7 @@ export const Top = () => {
         >
           Which would you prefer?
         </div>
-      </Modal>,
+      </Popup>,
     );
   }, []);
 
@@ -108,7 +108,7 @@ export const Top = () => {
             );
           }}
         >
-          Show ActionSheet
+          ActionSheet
         </Button>
       </Row>
       <Row>

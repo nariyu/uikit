@@ -7,12 +7,12 @@ import {
   useState,
 } from 'react';
 import { useRecoilState } from 'recoil';
-import { ModalManager } from 'shared/components/modalmanager';
+import { PopupManager } from 'shared/components/popupmanager';
 import { Spinner } from 'shared/components/spinner';
 import { classNames } from 'shared/utils/elementutil';
 import { userInfoState } from 'states/userinfostate';
-import { Modal } from '../../shared/components/modal';
 import { Submittable } from '../../shared/components/navigationcontroller';
+import { Popup } from '../../shared/components/popup';
 import { TextInput, TextInputHandler } from '../../shared/components/textinput';
 import styles from './editpage.module.scss';
 
@@ -53,7 +53,7 @@ export const UsernameEdit = forwardRef(
       new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
         setLoading(false);
         setUserInfo((userInfo) => ({ ...userInfo, username }));
-        ModalManager.open(<Modal>Username is updated.</Modal>);
+        PopupManager.open(<Popup>Username is updated.</Popup>);
         onClose();
       });
     }, [onClose]);

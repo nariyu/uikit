@@ -7,8 +7,8 @@ import {
   useState,
 } from 'react';
 import { useRecoilState } from 'recoil';
-import { Modal } from 'shared/components/modal';
-import { ModalManager } from 'shared/components/modalmanager';
+import { Popup } from 'shared/components/popup';
+import { PopupManager } from 'shared/components/popupmanager';
 import { Spinner } from 'shared/components/spinner';
 import { classNames } from 'shared/utils/elementutil';
 import { userInfoState } from 'states/userinfostate';
@@ -59,7 +59,7 @@ export const PhoneNumberEdit = forwardRef(
       new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
         setLoading(false);
         setUserInfo((userInfo) => ({ ...userInfo, phoneNumber }));
-        ModalManager.open(<Modal>Phone number is updated.</Modal>);
+        PopupManager.open(<Popup>Phone number is updated.</Popup>);
         onClose();
       });
     }, [onClose]);

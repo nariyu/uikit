@@ -1,8 +1,8 @@
 import { ReactNode, SyntheticEvent, useCallback, useState } from 'react';
 import { classNames, preventDefault } from 'shared/utils/elementutil';
 import { Button } from './button';
-import style from './modal.module.scss';
-import { ModalManager } from './modalmanager';
+import style from './popup.module.scss';
+import { PopupManager } from './popupmanager';
 
 interface ButtonProps {
   label: string;
@@ -14,7 +14,7 @@ interface Props {
   onClose?: () => void;
   buttons?: ButtonProps[];
 }
-export const Modal = (props: Props) => {
+export const Popup = (props: Props) => {
   const { children, onClose, buttons } = props;
 
   const [closed, setClosed] = useState(false);
@@ -47,10 +47,10 @@ export const Modal = (props: Props) => {
       setClosed(true);
       if (promise) {
         promise.finally(() => {
-          ModalManager.close();
+          PopupManager.close();
         });
       } else {
-        ModalManager.close();
+        PopupManager.close();
       }
     },
     [onClose, buttons],

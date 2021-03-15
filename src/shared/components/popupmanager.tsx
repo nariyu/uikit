@@ -1,8 +1,8 @@
 import ReactDOM from 'react-dom';
 import { preventDefault } from 'shared/utils/elementutil';
-import styles from './modalmanager.module.scss';
+import styles from './popupmanager.module.scss';
 
-export class ModalManager {
+export class PopupManager {
   private static modals: {
     modal: JSX.Element;
     enabledCloseByBackground: boolean;
