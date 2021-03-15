@@ -1,3 +1,5 @@
 # UIKit
 
-https://uikit.nariyu.jp/
+Mobile-First UI Kit for React
+
+Live Demo: https://uikit.nariyu.jp/
