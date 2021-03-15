@@ -1,0 +1,57 @@
+@import '../../styles/index';
+
+.notifyContainer {
+  position: fixed;
+  z-index: 8000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0 1rem;
+  pointer-events: none;
+  text-align: right;
+}
+
+.notify {
+  display: inline-block;
+  padding: 0.7rem 1.2rem;
+  line-height: 1.2;
+  // width: calc(var(--max-width) - 10rem);
+  text-align: center;
+
+  color: #fff;
+  border-radius: 0.3rem;
+
+  animation: appear 0.2s ease-out 0s forwards;
+
+  background-color: rgba(rgb(26, 138, 230), 0.9);
+  box-shadow: 0 2px 10px rgba(#000, 0.5);
+
+  &[data-type='info'] {
+    background-color: rgba(rgb(0, 121, 202), 0.9);
+    box-shadow: 0 2px 10px rgba(rgb(0, 65, 109), 0.5);
+  }
+
+  .closed & {
+    animation: disappear 0.2s ease-out 0s forwards;
+  }
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    transform: translate(0, -1rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes disappear {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

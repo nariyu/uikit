@@ -1,0 +1,79 @@
+@import '../../styles/index';
+
+.component {
+  position: absolute;
+  z-index: 5000;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+
+  background-color: var(--color-background);
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 2rem rgba(#000, 0.7);
+
+  opacity: 0;
+  animation: appear 0.15s ease-out 0s forwards;
+
+  cursor: default;
+
+  &.closed {
+    pointer-events: none;
+    animation: disappear 0.1s ease-in 0s forwards;
+  }
+
+  .content {
+    position: relative;
+    z-index: 1;
+    min-width: 20rem;
+    max-height: 30rem;
+    padding: 3rem 3rem 2rem;
+    overflow: auto;
+    line-height: 1.5;
+    > *:first-child {
+      margin-top: 0;
+    }
+    > *:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .footer {
+    position: relative;
+    z-index: 2;
+    padding: 0 1rem 1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    > * {
+      margin-left: 0.8rem;
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + 1rem));
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes disappear {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + 1rem));
+  }
+}

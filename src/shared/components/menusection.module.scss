@@ -1,0 +1,76 @@
+@import '../../styles/index';
+
+.section {
+  border-bottom: 1px solid var(--color-line);
+  position: relative;
+  margin: 0;
+
+  &:first-child {
+    border-top: 0;
+  }
+
+  + .section {
+    margin-top: 3rem;
+  }
+}
+
+.sectionTitle {
+  margin: 2rem 0 0;
+  padding: 0.5rem 0.7rem 0.5rem 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--color-menu-title);
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  padding: 1rem 0.7rem 1rem 1rem;
+  line-height: 1;
+  background-color: #fff;
+  border-top: 1px solid var(--color-line);
+  user-select: none;
+  text-decoration: none;
+  color: inherit;
+
+  &.link {
+    cursor: pointer;
+    &:active {
+      background-color: rgb(230, 236, 240);
+    }
+  }
+
+  .menuItemTitle {
+    margin-right: 1rem;
+    font-size: 1.1rem;
+    text-align: right;
+  }
+  .menuItemInfo,
+  .menuItemIcon {
+    color: var(--color-text-blue);
+    font-size: 1rem;
+  }
+  .menuItemInfo {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: right;
+    white-space: nowrap;
+  }
+  .menuItemIcon {
+    margin-left: 0.5rem;
+  }
+
+  svg {
+    vertical-align: middle;
+    line-height: 1;
+    width: 1.5rem;
+  }
+
+  &.centered {
+    text-align: center;
+    justify-content: center;
+  }
+}

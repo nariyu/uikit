@@ -1,0 +1,90 @@
+import {
+  forwardRef,
+  RefObject,
+  useCallback,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
+import { useRecoilState } from 'recoil';
+import { ModalManager } from 'shared/components/modalmanager';
+import { Spinner } from 'shared/components/spinner';
+import { classNames } from 'shared/utils/elementutil';
+import { userInfoState } from 'states/userinfostate';
+import { Modal } from '../../shared/components/modal';
+import { Submittable } from '../../shared/components/navigationcontroller';
+import { TextInput, TextInputHandler } from '../../shared/components/textinput';
+import styles from './editpage.module.scss';
+
+interface Props {
+  onClose: () => void;
+}
+export const UsernameEdit = forwardRef(
+  (props: Props, ref: RefObject<Submittable>) => {
+    const { onClose } = props;
+
+    const usernameTextInputRef = useRef<TextInputHandler>(null);
+
+    const [userInfo, setUserInfo] = useRecoilState(userInfoState);
+
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+    const [errorType, setErrorType] = useState<'' | 'username'>('');
+
+    // OK
+    const submit = useCallback(() => {
+      setError('');
+      setErrorType('');
+
+      const usernameTextInput = usernameTextInputRef.current;
+      if (!usernameTextInput) return;
+
+      const username = usernameTextInput.getValue();
+
+      // バリデーション
+      if (!username) {
+        setErrorType('username');
+        setError('Please enter your name.');
+        return;
+      }
+
+      setLoading(true);
+
+      new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
+        setLoading(false);
+        setUserInfo((userInfo) => ({ ...userInfo, username }));
+        ModalManager.open(<Modal>Username is updated.</Modal>);
+        onClose();
+      });
+    }, [onClose]);
+
+    useImperativeHandle(ref, () => ({ submit }), [submit]);
+
+    return (
+      <div className={styles.component}>
+        <div className={styles.field}>
+          <TextInput
+            ref={usernameTextInputRef}
+            name="username"
+            label="Username"
+            disabled={loading}
+            defaultValue={userInfo.username}
+            labelClassName={classNames(
+              errorType === 'username' ? styles.errorLabel : undefined,
+            )}
+            inputClassName={classNames(
+              errorType === 'username' ? styles.errorInput : undefined,
+            )}
+          />
+        </div>
+        {errorType === 'username' && (
+          <p className={styles.fieldError}>{error}</p>
+        )}
+        {loading && <Spinner />}
+      </div>
+    );
+  },
+);
+
+export const UsernameEditTitle = () => <>Username Setting</>;
+export const UsernameEditSubmitButton = () => <>Save</>;
