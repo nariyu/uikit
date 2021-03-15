@@ -114,7 +114,12 @@ export const Top = () => {
           {buttonSelected ? 'Selected' : 'Not Selected'}
         </Button>
       </Row>
-      <Row>url: {Config.VERCEL_URL}</Row>
+      <Row>
+        Source:{' '}
+        <a href="https://github.com/nariyu/uikit" target="_blank">
+          github.com/nariyu/uikit
+        </a>
+      </Row>
     </div>
   );
 };
