@@ -135,7 +135,7 @@ export const MainView = () => {
           <div className={styles.topViewTitleContent}>
             <h1 className={styles.appName}>
               {userInfo && userInfo.happy && '😍 '}
-              UI PROTOTYPE{userInfo && userInfo.happy && ' 😍'}
+              UIKit{userInfo && userInfo.happy && ' 😍'}
             </h1>
           </div>
           <div className={styles.topViewTitleRight}>

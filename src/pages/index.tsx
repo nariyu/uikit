@@ -1,8 +1,8 @@
 import Head from 'next/head';
 
-const title = 'UI Components by @nariyu';
-const description = 'UI Components';
-const url = 'https://uiprototype.vercel.app';
+const title = 'UIKit by @nariyu';
+const description = 'UIKit';
+const url = 'https://uikit.nariyu.jp';
 
 const Home = () => {
   return (
