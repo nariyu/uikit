@@ -6,6 +6,7 @@ module.exports = {
   env: {
     VERSION: packageJson.version,
     ENV: process.env.ENV,
+    VERCEL_URL: process.env.VERCEL_URL,
   },
 
   webpack: (config, { dev, isServer }) => {

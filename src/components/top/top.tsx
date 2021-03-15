@@ -1,3 +1,4 @@
+import { Config } from 'config';
 import { ReactNode, useCallback, useState } from 'react';
 import { Button } from 'shared/components/button';
 import { Modal } from 'shared/components/modal';
@@ -113,6 +114,7 @@ export const Top = () => {
           {buttonSelected ? 'Selected' : 'Not Selected'}
         </Button>
       </Row>
+      <Row>url: {Config.VERCEL_URL}</Row>
     </div>
   );
 };
