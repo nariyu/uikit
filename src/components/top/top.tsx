@@ -1,16 +1,20 @@
 import { ReactNode, useCallback, useState } from 'react';
+import { useRecoilState } from 'recoil';
 import { Button } from 'shared/components/button';
 import { NotificationManager } from 'shared/components/notificationmanager';
 import { Popup } from 'shared/components/popup';
 import { PopupManager } from 'shared/components/popupmanager';
 import { useActionSheet } from 'states/actionsheetstate';
 import { useNavigationControllerModal } from 'states/navigationcontrollermodalstate';
+import { themeState } from 'states/themestate';
 import { CheckBox } from '../../shared/components/checkbox';
 import styles from './top.module.scss';
 
 export const Top = () => {
   const { showActionSheet } = useActionSheet();
   const { showNavigationControllerModal } = useNavigationControllerModal();
+
+  const [theme, setTheme] = useRecoilState(themeState);
 
   // ナビゲーションモーダルを開く
   const setNavigationModalType = useCallback(() => {
@@ -92,7 +96,6 @@ export const Top = () => {
           onClick={() => {
             showActionSheet(
               'actionsheet1',
-              'Wow!',
               <div
                 style={{
                   padding: '1rem',
@@ -105,6 +108,9 @@ export const Top = () => {
               >
                 😍
               </div>,
+              {
+                title: 'Wow!',
+              },
             );
           }}
         >
@@ -122,10 +128,9 @@ export const Top = () => {
       </Row>
       <Row>
         <CheckBox
-          label="CHECKBOX"
-          onChange={(checked) =>
-            NotificationManager.add(checked ? 'Checked' : 'Unchecked')
-          }
+          label="Dark Mode"
+          checked={theme === 'dark'}
+          onChange={(checked) => setTheme(checked ? 'dark' : 'light')}
         />
       </Row>
       <Row>
@@ -136,7 +141,7 @@ export const Top = () => {
             NotificationManager.add(buttonSelected ? 'Unselect' : 'Select');
           }}
         >
-          {buttonSelected ? 'Selected' : 'Not Selected'}
+          {buttonSelected ? 'Toogle: selected' : 'Toggle: not selected'}
         </Button>
       </Row>
       <Row>

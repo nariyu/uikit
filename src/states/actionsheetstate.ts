@@ -4,8 +4,12 @@ import { atom, useRecoilState } from 'recoil';
 interface Props {
   shown: boolean;
   id?: string;
-  title?: string;
   content?: ReactNode;
+  options?: ActionSheetOptions;
+}
+
+export interface ActionSheetOptions {
+  title?: ReactNode;
 }
 
 export const actionSheetState = atom<Props>({
@@ -22,12 +26,12 @@ export const useActionSheet = () => {
   );
 
   const showActionSheet = useCallback(
-    (id: string, title: string | undefined, content: ReactNode) => {
+    (id: string, content: ReactNode, options?: ActionSheetOptions) => {
       setActionSheetInfo({
         shown: true,
         id,
-        title,
         content,
+        options,
       });
     },
     [],

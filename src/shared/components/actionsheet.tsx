@@ -1,4 +1,5 @@
 import { SyntheticEvent, useCallback, useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { preventDefault } from 'shared/utils/elementutil';
 import { useActionSheet } from 'states/actionsheetstate';
 import styles from './actionsheet.module.scss';
@@ -6,12 +7,15 @@ import { CloseButton } from './closebutton';
 
 interface Props {
   id: string;
+  global?: boolean;
 }
 export const ActionSheet = (props: Props) => {
-  const { id } = props;
+  const { id, global } = props;
 
   const { actionSheetInfo, hideActionSheet } = useActionSheet();
   const [shown, setShown] = useState(false);
+
+  const options = actionSheetInfo.options || {};
 
   useEffect(() => {
     setShown(
@@ -34,7 +38,7 @@ export const ActionSheet = (props: Props) => {
     hideActionSheet();
   }, []);
 
-  return (
+  const renderItem = (
     <>
       <div
         className={styles.background}
@@ -51,11 +55,9 @@ export const ActionSheet = (props: Props) => {
           <CloseButton color="white" />
         </div>
 
-        {actionSheetInfo &&
-          actionSheetInfo.id === id &&
-          typeof actionSheetInfo.title === 'string' && (
-            <div className={styles.title}>{actionSheetInfo.title}</div>
-          )}
+        {actionSheetInfo.id === id && typeof options.title === 'string' && (
+          <div className={styles.title}>{options.title}</div>
+        )}
 
         <div className={styles.content}>
           {actionSheetInfo &&
@@ -65,4 +67,14 @@ export const ActionSheet = (props: Props) => {
       </div>
     </>
   );
+
+  if (global) {
+    if (process.browser) {
+      return createPortal(renderItem, document.body);
+    } else {
+      return renderItem;
+    }
+  } else {
+    return renderItem;
+  }
 };

@@ -21,6 +21,8 @@ body {
 
   height: 100vh;
 
+  transition: color 0.2s linear 0s, background-color 0.2s linear 0s;
+
   overflow: hidden;
   &[data-initialized] {
     background: var(--color-background) none repeat center center;

@@ -1,4 +1,5 @@
 import { MainView } from 'components/mainview';
+import { ErrorBoundary } from 'core/errorboundary';
 import { AppProps } from 'next/dist/next-server/lib/router/router';
 import Head from 'next/head';
 import { RecoilRoot } from 'recoil';
@@ -14,7 +15,9 @@ const App = ({ Component, pageProps }: AppProps) => {
           content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
         />
       </Head>
-      <Component {...pageProps} />
+      <ErrorBoundary>
+        <Component {...pageProps} />
+      </ErrorBoundary>
       <MainView />
     </RecoilRoot>
   );

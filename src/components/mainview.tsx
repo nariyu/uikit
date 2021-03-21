@@ -1,3 +1,7 @@
+import {
+  GlobalNavigationControlerContext,
+  ModalNavigationControllerContext,
+} from 'context/navigationcontrollercontext';
 import { useWindowState } from 'hooks/usewindowstate';
 import {
   useCallback,
@@ -5,6 +9,7 @@ import {
   useRef,
   useState,
   SyntheticEvent,
+  useContext,
 } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { ActionSheet } from 'shared/components/actionsheet';
@@ -22,6 +27,7 @@ import {
 import { TabNavigator } from '../shared/components/tabnavigator';
 import styles from './mainview.module.scss';
 import { MenuButton } from './menu/menu';
+import { SubViewContent, SubViewTitle } from './top/subview';
 import { Top } from './top/top';
 
 /**
@@ -49,9 +55,11 @@ export const MainView = () => {
 
   // NavigationController
   const navigationControllerRef = useRef<NavigationControllerHandler>(null);
-  const navigationControllerModalRef = useRef<NavigationControllerHandler>(
+  const modalNavigationControllerRef = useRef<NavigationControllerHandler>(
     null,
   );
+
+  const navigationController = useContext(GlobalNavigationControlerContext);
 
   const setMenuOpened = useSetRecoilState(menuState);
 
@@ -69,7 +77,6 @@ export const MainView = () => {
   // ログインしたらメニューを閉じる
   useEffect(() => {
     if (userInfo) {
-      const navigationController = navigationControllerRef.current;
       if (navigationController) {
         navigationController.removeAllViews();
       }
@@ -84,171 +91,160 @@ export const MainView = () => {
   }, [navigationControllerModalInfo]);
 
   // モーダルの背景クリック
-  const onClickModalBackground = useCallback((event: SyntheticEvent) => {
-    preventDefault(event);
-    const navigationController = navigationControllerRef.current;
-    if (navigationController) {
-      navigationController.removeAllViews();
-    }
-    hideNavigationContollerModal();
-  }, []);
+  const onClickModalBackground = useCallback(
+    (event: SyntheticEvent) => {
+      preventDefault(event);
+      if (navigationController) {
+        navigationController.removeAllViews();
+      }
+      hideNavigationContollerModal();
+    },
+    [navigationController],
+  );
 
   // Next ボタン
   const onClickNextNavigation = useCallback((event: SyntheticEvent) => {
     preventDefault(event);
 
-    const navigationControllerModal = navigationControllerModalRef.current;
+    const navigationControllerModal = modalNavigationControllerRef.current;
+
     if (navigationControllerModal) {
-      navigationControllerModal.pushView(
-        'I am ...',
-        <div style={{ padding: '1rem' }}>
-          <p>I am Nariyu.</p>
-          <Button
-            data-block
-            onClick={() => {
-              navigationControllerModal.pushView(
-                'Hello, World!',
-                <div
-                  style={{
-                    padding: '3rem 1rem',
-                    fontSize: '5rem',
-                    textAlign: 'center',
-                  }}
-                >
-                  🤗
-                </div>,
-              );
-            }}
-          >
-            Next
-          </Button>
-        </div>,
-      );
+      navigationControllerModal.pushView(<SubViewTitle />, <SubViewContent />);
     }
   }, []);
 
   return (
-    <div className={styles.component}>
-      <div className={styles.topView}>
-        <div className={styles.topViewTitle}>
-          <div className={styles.topViewTitleLeft}></div>
-          <div className={styles.topViewTitleContent}>
-            <h1 className={styles.appName}>
-              {userInfo && userInfo.happy && '😍 '}
-              UIKit{userInfo && userInfo.happy && ' 😍'}
-            </h1>
-          </div>
-          <div className={styles.topViewTitleRight}>
-            <MenuButton navigationControllerRef={navigationControllerRef} />
-          </div>
-        </div>
-        <div className={styles.topViewContent}>
-          <Top />
-        </div>
-      </div>
-
-      <div
-        className={styles.navigationControllerModal}
-        aria-hidden={
-          navigationControllerViewIndex === -1 &&
-          !navigationControllerModalInfo.shown
-        }
-        onClick={onClickModalBackground}
-      />
-
-      <div
-        className={styles.navigationController}
-        aria-hidden={navigationControllerViewIndex === -1}
+    <GlobalNavigationControlerContext.Provider
+      value={navigationControllerRef.current}
+    >
+      <ModalNavigationControllerContext.Provider
+        value={modalNavigationControllerRef.current}
       >
-        <NavigationController
-          ref={navigationControllerRef}
-          defaultNoBorder={true}
-          onClose={() => setMenuOpened(false)}
-          onChangeIndex={(index) => {
-            setNavigationControllerViewIndex(index);
-          }}
-        ></NavigationController>
-      </div>
+        <div className={styles.component}>
+          <div className={styles.topView}>
+            <div className={styles.topViewTitle}>
+              <div className={styles.topViewTitleLeft}></div>
+              <div className={styles.topViewTitleContent}>
+                <h1 className={styles.appName}>
+                  {userInfo && userInfo.happy && '😍 '}
+                  UIKit{userInfo && userInfo.happy && ' 😍'}
+                </h1>
+              </div>
+              <div className={styles.topViewTitleRight}>
+                <MenuButton />
+              </div>
+            </div>
+            <div className={styles.topViewContent}>
+              <Top />
+            </div>
+          </div>
 
-      <div
-        className={styles.navigationModalContainer}
-        aria-hidden={!navigationControllerModalInfo.shown}
-      >
-        <div
-          className={styles.navigationModal}
-          aria-hidden={!navigationControllerModalInfo.shown}
-        >
-          <NavigationController
-            ref={navigationControllerModalRef}
-            defaultTitle="NavigationController + Modal"
-            defaultLeftButton="Close"
-            onClickDefaultLeftButton={hideNavigationContollerModal}
+          <div
+            className={styles.navigationControllerModal}
+            aria-hidden={
+              navigationControllerViewIndex === -1 &&
+              !navigationControllerModalInfo.shown
+            }
+            onClick={onClickModalBackground}
+          />
+
+          <div
+            className={styles.navigationController}
+            aria-hidden={navigationControllerViewIndex === -1}
           >
-            <TabNavigator
-              items={[
-                {
-                  title: 'Home',
-                  icon: <span style={{ opacity: 0.3 }}>🙇‍♂️</span>,
-                  selectedIcon: <>🙇‍♂️</>,
-                  view: (
-                    <div style={{ padding: '1rem', textAlign: 'center' }}>
-                      Welcome!
-                    </div>
-                  ),
-                },
-                {
-                  title: 'Hello',
-                  icon: <span style={{ opacity: 0.3 }}>🌷</span>,
-                  selectedIcon: <>🌷</>,
-                  view: (
-                    <div style={{ padding: '1rem', textAlign: 'center' }}>
-                      <p>Hello!</p>
-                      <Button data-block onClick={onClickNextNavigation}>
-                        Next
-                      </Button>
-                    </div>
-                  ),
-                },
-                {
-                  title: 'Wow!',
-                  icon: <span style={{ opacity: 0.3 }}>⚽️</span>,
-                  selectedIcon: <>⚽️</>,
-                  view: (
-                    <div style={{ padding: '1rem', textAlign: 'center' }}>
-                      <Button
-                        onClick={() => {
-                          showActionSheet(
-                            'actionsheet2',
-                            'Pretty!',
-                            <div
-                              style={{
-                                padding: '1rem',
-                                minHeight: '20rem',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                fontSize: '6rem',
-                              }}
-                            >
-                              🥰
-                            </div>,
-                          );
-                        }}
-                      >
-                        Show ActionSheet
-                      </Button>
-                    </div>
-                  ),
-                },
-              ]}
-            />
-          </NavigationController>
+            <NavigationController
+              ref={navigationControllerRef}
+              defaultNoBorder={true}
+              onClose={() => setMenuOpened(false)}
+              onChangeIndex={(index) => {
+                setNavigationControllerViewIndex(index);
+              }}
+            ></NavigationController>
+          </div>
 
-          <ActionSheet id="actionsheet2" />
+          <div
+            className={styles.navigationModalContainer}
+            aria-hidden={!navigationControllerModalInfo.shown}
+          >
+            <div
+              className={styles.navigationModal}
+              aria-hidden={!navigationControllerModalInfo.shown}
+            >
+              <NavigationController
+                ref={modalNavigationControllerRef}
+                defaultTitle="NavigationController + Modal"
+                defaultLeftButton="Close"
+                onClickDefaultLeftButton={hideNavigationContollerModal}
+              >
+                <TabNavigator
+                  items={[
+                    {
+                      title: 'Home',
+                      icon: <span style={{ opacity: 0.3 }}>🙇‍♂️</span>,
+                      selectedIcon: <>🙇‍♂️</>,
+                      view: (
+                        <div style={{ padding: '1rem', textAlign: 'center' }}>
+                          Welcome!
+                        </div>
+                      ),
+                    },
+                    {
+                      title: 'Hello',
+                      icon: <span style={{ opacity: 0.3 }}>🌷</span>,
+                      selectedIcon: <>🌷</>,
+                      view: (
+                        <div style={{ padding: '1rem', textAlign: 'center' }}>
+                          <p>Hello!</p>
+                          <Button data-block onClick={onClickNextNavigation}>
+                            Next
+                          </Button>
+                        </div>
+                      ),
+                    },
+                    {
+                      title: 'Wow!',
+                      icon: <span style={{ opacity: 0.3 }}>⚽️</span>,
+                      selectedIcon: <>⚽️</>,
+                      view: (
+                        <div style={{ padding: '1rem', textAlign: 'center' }}>
+                          <Button
+                            onClick={() => {
+                              showActionSheet(
+                                'actionsheet2',
+                                <div
+                                  style={{
+                                    padding: '1rem',
+                                    minHeight: '20rem',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    fontSize: '6rem',
+                                  }}
+                                >
+                                  🥰
+                                </div>,
+                                {
+                                  title: 'Pretty!',
+                                },
+                              );
+                            }}
+                          >
+                            Show ActionSheet
+                          </Button>
+                        </div>
+                      ),
+                    },
+                  ]}
+                />
+              </NavigationController>
+
+              <ActionSheet id="actionsheet2" />
+            </div>
+          </div>
+
+          <ActionSheet id="actionsheet1" global />
         </div>
-      </div>
-
-      <ActionSheet id="actionsheet1" />
-    </div>
+      </ModalNavigationControllerContext.Provider>
+    </GlobalNavigationControlerContext.Provider>
   );
 };

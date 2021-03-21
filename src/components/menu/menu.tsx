@@ -1,19 +1,16 @@
 import { MenuAlt3 as MenuIcon } from '@styled-icons/heroicons-outline/MenuAlt3';
 import { Config } from 'config';
-import React, { RefObject, SyntheticEvent, useCallback, useRef } from 'react';
+import { GlobalNavigationControlerContext } from 'context/navigationcontrollercontext';
+import React, { SyntheticEvent, useCallback, useContext, useRef } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { CheckBox } from 'shared/components/checkbox';
 import { MenuItem } from 'shared/components/menuitem';
 import { MenuSection } from 'shared/components/menusection';
 import { preventDefault } from 'shared/utils/elementutil';
 import { menuState } from 'states/menustate';
-import { themeState } from 'states/themestate';
 import { userInfoState } from 'states/userinfostate';
 
-import {
-  NavigationControllerHandler,
-  Submittable,
-} from '../../shared/components/navigationcontroller';
+import { Submittable } from '../../shared/components/navigationcontroller';
 import { EmailEdit, EmailEditSubmitButton, EmailEditTitle } from './emailedit';
 import styles from './menu.module.scss';
 import {
@@ -29,11 +26,8 @@ import {
   UsernameEditTitle,
 } from './usernameedit';
 
-interface Props {
-  navigationController: NavigationControllerHandler;
-}
-export const Menu = ({ navigationController }: Props) => {
-  const [theme, setTheme] = useRecoilState(themeState);
+export const Menu = () => {
+  const navigationController = useContext(GlobalNavigationControlerContext);
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
 
   // ビューの参照
@@ -117,17 +111,6 @@ export const Menu = ({ navigationController }: Props) => {
               }
             />
           </MenuSection>
-          <MenuSection title="Appearance">
-            <MenuItem
-              title="Dark Mode"
-              icon={
-                <CheckBox
-                  checked={theme === 'dark'}
-                  onChange={(checked) => setTheme(checked ? 'dark' : 'light')}
-                />
-              }
-            />
-          </MenuSection>
           <MenuSection title="Links">
             <MenuItem
               title="Facebook"
@@ -183,30 +166,26 @@ export const MenuTitle = () => {
 };
 
 // メニューボタン
-interface MenuButtonProps {
-  navigationControllerRef: RefObject<NavigationControllerHandler>;
-}
-export const MenuButton = (props: MenuButtonProps) => {
-  const { navigationControllerRef } = props;
+export const MenuButton = () => {
+  const navigationController = useContext(GlobalNavigationControlerContext);
 
   const userInfo = useRecoilValue(userInfoState);
 
   const setMenuOpened = useSetRecoilState(menuState);
 
   // メニューを開く
-  const onClickMenuOpenButton = useCallback((event: SyntheticEvent) => {
-    preventDefault(event);
+  const onClickMenuOpenButton = useCallback(
+    (event: SyntheticEvent) => {
+      preventDefault(event);
 
-    const navigationController = navigationControllerRef.current;
-    if (!navigationController) return;
+      if (!navigationController) return;
 
-    setMenuOpened(true);
+      setMenuOpened(true);
 
-    navigationController.pushView(
-      <MenuTitle />,
-      <Menu navigationController={navigationController} />,
-    );
-  }, []);
+      navigationController.pushView(<MenuTitle />, <Menu />);
+    },
+    [navigationController],
+  );
 
   return (
     <div className={styles.menuBtn} onClick={onClickMenuOpenButton}>
