@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { windowState } from 'states/windowstate';
+import { windowState } from '../states/windowstate';
 
 export const useWindowState = () => {
   const [windowSize, setWindowSize] = useRecoilState(windowState);

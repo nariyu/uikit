@@ -1,80 +1,125 @@
-import { SyntheticEvent, useCallback, useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
+import {
+  createRef,
+  forwardRef,
+  ReactNode,
+  RefObject,
+  SyntheticEvent,
+  useCallback,
+  useImperativeHandle,
+  useState,
+} from 'react';
+import ReactDOM from 'react-dom';
 import { preventDefault } from 'shared/utils/elementutil';
-import { useActionSheet } from 'states/actionsheetstate';
 import styles from './actionsheet.module.scss';
-import { CloseButton } from './closebutton';
 
 interface Props {
-  id: string;
-  global?: boolean;
+  title?: ReactNode;
+  children: ReactNode;
+  defaultShown?: boolean;
+  onClose?: () => void;
 }
-export const ActionSheet = (props: Props) => {
-  const { id, global } = props;
 
-  const { actionSheetInfo, hideActionSheet } = useActionSheet();
-  const [shown, setShown] = useState(false);
+export interface ActionSheetHandler {
+  hide: () => void;
+}
 
-  const options = actionSheetInfo.options || {};
+export const ActionSheet = forwardRef(
+  (props: Props, ref: RefObject<ActionSheetHandler>) => {
+    const { title, children, defaultShown = true, onClose } = props;
 
-  useEffect(() => {
-    setShown(
-      actionSheetInfo && actionSheetInfo.shown && actionSheetInfo.id === id,
+    const [shown, setShown] = useState(defaultShown);
+
+    useImperativeHandle(
+      ref,
+      () => ({
+        hide: () => {
+          setShown(false);
+          if (onClose) onClose();
+        },
+      }),
+      [onClose],
     );
-  }, [id, actionSheetInfo]);
 
-  const onClickBackground = useCallback((event: SyntheticEvent) => {
-    preventDefault(event);
-    hideActionSheet();
-  }, []);
+    const onClickBackground = useCallback(
+      (event: SyntheticEvent) => {
+        preventDefault(event);
+        setShown(false);
+        if (onClose) onClose();
+      },
+      [onClose],
+    );
 
-  const onClickCloseButton = useCallback((event: SyntheticEvent) => {
-    preventDefault(event);
-
-    if (document.activeElement instanceof HTMLElement) {
-      document.activeElement.blur();
-    }
-
-    hideActionSheet();
-  }, []);
-
-  const renderItem = (
-    <>
-      <div
-        className={styles.background}
-        aria-hidden={!shown}
-        onClick={onClickBackground}
-      />
-      <div
-        className={styles.component}
-        data-ui="actionsheet"
-        aria-hidden={!shown ? true : undefined}
-        onClick={preventDefault}
-      >
-        <div className={styles.closeBtn} onClick={onClickCloseButton}>
-          <CloseButton color="white" />
+    return (
+      <>
+        <div
+          className={styles.background}
+          aria-hidden={!shown}
+          onClick={onClickBackground}
+        />
+        <div
+          className={styles.component}
+          data-ui="actionsheet"
+          aria-hidden={!shown}
+          onClick={preventDefault}
+        >
+          <div className={styles.content}>
+            {title && <div className={styles.title}>{title}</div>}
+            {children}
+          </div>
         </div>
+      </>
+    );
+  },
+);
 
-        {actionSheetInfo.id === id && typeof options.title === 'string' && (
-          <div className={styles.title}>{options.title}</div>
-        )}
+export interface ActionSheetOptions {
+  container?: HTMLElement;
+}
 
-        <div className={styles.content}>
-          {actionSheetInfo &&
-            actionSheetInfo.id === id &&
-            actionSheetInfo.content}
-        </div>
-      </div>
-    </>
+// Hooks
+export const showActionSheet = (
+  title: ReactNode | undefined,
+  content: ReactNode,
+  options?: ActionSheetOptions,
+) => {
+  options = options || {};
+
+  let global = false;
+
+  let container = options.container;
+  if (!container) {
+    container = document.createElement('div');
+    container.className = styles.container;
+
+    document.body.appendChild(container);
+    global = true;
+  }
+
+  const actionSheetRef = createRef<ActionSheetHandler>();
+
+  ReactDOM.render(
+    <ActionSheet
+      ref={actionSheetRef}
+      title={title}
+      onClose={() => {
+        container.classList.add(styles.hidden);
+        if (global) {
+          window.setTimeout(() => {
+            if (container.parentElement) {
+              container.parentElement.removeChild(container);
+            }
+          }, 500);
+        }
+      }}
+    >
+      {content}
+    </ActionSheet>,
+    container,
   );
 
-  if (global) {
-    if (process.browser) {
-      return createPortal(renderItem, document.body);
-    } else {
-      return renderItem;
+  return () => {
+    if (actionSheetRef.current) {
+      actionSheetRef.current.hide();
     }
-  } else {
-    return renderItem;
-  }
+  };
 };

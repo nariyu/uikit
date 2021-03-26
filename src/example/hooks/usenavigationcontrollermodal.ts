@@ -1,16 +1,6 @@
+import { navigationControllerModalState } from 'example/states/navigationcontrollermodalstate';
 import { useCallback } from 'react';
-import { atom, useRecoilState } from 'recoil';
-
-interface Props {
-  shown: boolean;
-}
-
-export const navigationControllerModalState = atom<Props>({
-  key: 'navigationControllerModalState',
-  default: {
-    shown: false,
-  },
-});
+import { useRecoilState } from 'recoil';
 
 // Hooks
 export const useNavigationControllerModal = () => {

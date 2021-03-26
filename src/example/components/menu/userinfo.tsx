@@ -1,5 +1,5 @@
 import { useRecoilValue } from 'recoil';
-import { userInfoState } from 'states/userinfostate';
+import { userInfoState } from '../../states/userinfostate';
 import styles from './userinfo.module.scss';
 
 export const UserInfo = () => {

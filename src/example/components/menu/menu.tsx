@@ -1,16 +1,16 @@
 import { MenuAlt3 as MenuIcon } from '@styled-icons/heroicons-outline/MenuAlt3';
-import { Config } from 'config';
-import { GlobalNavigationControlerContext } from 'context/navigationcontrollercontext';
 import React, { SyntheticEvent, useCallback, useContext, useRef } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { CheckBox } from 'shared/components/checkbox';
 import { MenuItem } from 'shared/components/menuitem';
 import { MenuSection } from 'shared/components/menusection';
+import { Submittable } from 'shared/components/navigationcontroller';
 import { preventDefault } from 'shared/utils/elementutil';
-import { menuState } from 'states/menustate';
-import { userInfoState } from 'states/userinfostate';
+import { Config } from '../../config';
+import { GlobalNavigationControlerContext } from '../../context/navigationcontrollercontext';
+import { menuState } from '../../states/menustate';
+import { userInfoState } from '../../states/userinfostate';
 
-import { Submittable } from '../../shared/components/navigationcontroller';
 import { EmailEdit, EmailEditSubmitButton, EmailEditTitle } from './emailedit';
 import styles from './menu.module.scss';
 import {
@@ -100,7 +100,7 @@ export const Menu = () => {
               onClick={() => onClickEditButton('phone')}
             />
             <MenuItem
-              title="Happy?"
+              title={userInfo.happy ? 'Happy!😍' : 'Happy?'}
               icon={
                 <CheckBox
                   defaultChecked={userInfo.happy}

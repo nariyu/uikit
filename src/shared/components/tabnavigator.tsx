@@ -2,7 +2,8 @@ import { ReactNode, useState } from 'react';
 import styles from './tabnavigator.module.scss';
 
 interface TabNavigatorItem {
-  title?: string;
+  title?: string | ReactNode;
+  accesibilityTitle?: string;
   icon?: ReactNode;
   selectedIcon?: ReactNode;
   disabled?: boolean;
@@ -65,13 +66,21 @@ interface TabProps extends TabNavigatorItem {
   onClick: () => void;
 }
 export const Tab = (props: TabProps) => {
-  const { title, icon, selectedIcon, selected, disabled, onClick } = props;
+  const {
+    title,
+    accesibilityTitle,
+    icon,
+    selectedIcon,
+    selected,
+    disabled,
+    onClick,
+  } = props;
   return (
     <div
       className={styles.tab}
       aria-selected={selected}
       aria-disabled={disabled}
-      aria-label={title}
+      aria-label={typeof title === 'string' ? title : accesibilityTitle}
       onClick={onClick}
     >
       <div className={styles.icon}>

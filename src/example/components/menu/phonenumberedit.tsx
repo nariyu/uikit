@@ -7,14 +7,14 @@ import {
   useState,
 } from 'react';
 import { useRecoilState } from 'recoil';
+import { Submittable } from 'shared/components/navigationcontroller';
 import { Popup } from 'shared/components/popup';
 import { PopupManager } from 'shared/components/popupmanager';
 import { Spinner } from 'shared/components/spinner';
+import { TextInput, TextInputHandler } from 'shared/components/textinput';
 import { classNames } from 'shared/utils/elementutil';
-import { userInfoState } from 'states/userinfostate';
-import { validatePhoneNumber } from 'validators';
-import { Submittable } from '../../shared/components/navigationcontroller';
-import { TextInput, TextInputHandler } from '../../shared/components/textinput';
+import { userInfoState } from '../../states/userinfostate';
+import { validatePhoneNumber } from '../../validators';
 import styles from './editpage.module.scss';
 
 interface Props {
@@ -94,5 +94,5 @@ export const PhoneNumberEdit = forwardRef(
   },
 );
 
-export const PhoneNumberEditTitle = () => <>Phone Number Setting</>;
+export const PhoneNumberEditTitle = () => <>Phone Number</>;
 export const PhoneNumberEditSubmitButton = () => <>Save</>;
