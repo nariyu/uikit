@@ -67,7 +67,7 @@ body {
   font-display: fallback;
 
   color: var(--color-text);
-  background-color: var(--color-background);
+  // background-color: var(--color-background);
 
   -webkit-tap-highlight-color: transparent;
   // font-feature-settings: 'palt' 1;
@@ -76,7 +76,7 @@ body {
 
   height: 100vh;
 
-  // transition: color 0.2s linear 0s, background-color 0.2s linear 0s;
+  transition: color 0.2s linear 0s, background-color 0.2s linear 0s;
 
   overflow: hidden;
 }

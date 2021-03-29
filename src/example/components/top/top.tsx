@@ -162,7 +162,7 @@ export const Top = () => {
           </a>
         </Row>
         <Row>
-          <p>{Config.VERCEL_GIT_COMMIT_MESSAGE}</p>
+          <p>{Config.VERCEL_GIT_COMMIT_SHA}</p>
         </Row>
       </div>
     </div>
