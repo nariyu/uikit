@@ -35,7 +35,7 @@
   // DARK THEME
   &[data-theme='dark'] {
     --color-text: #fff;
-    // --color-background: #111;
+    --color-background: #111;
     --color-line: #333;
     --color-button-background: #333;
     --color-button-border: rgba(255, 255, 255, 0.15);
@@ -76,13 +76,9 @@ body {
 
   height: 100vh;
 
-  transition: color 0.2s linear 0s, background-color 0.2s linear 0s;
+  // transition: color 0.2s linear 0s, background-color 0.2s linear 0s;
 
   overflow: hidden;
-  &[data-initialized] {
-    background: var(--color-background) none repeat center center;
-    background-size: 10rem 10rem;
-  }
 }
 
 /* Safari用のハックは、Chromeに適用されないようにする */
