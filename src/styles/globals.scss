@@ -32,25 +32,25 @@
   --ease-back-in: cubic-bezier(0.59, -0.21, 0.84, 0.58);
   --ease-back-out: cubic-bezier(0.17, 0.67, 0.49, 1.18);
 
-  // // DARK THEME
-  // &[data-theme='dark'] {
-  //   --color-text: #fff;
-  //   --color-background: #111;
-  //   --color-line: #333;
-  //   --color-button-background: #333;
-  //   --color-button-border: rgba(255, 255, 255, 0.15);
-  //   --color-button-noframe: #eee;
-  //   --color-button-noframe-background: #333;
-  //   --color-button-secondary: #eee;
-  //   --color-button-secondary-background: #333;
-  //   --color-button-secondary-border: rgba(255, 255, 255, 0.15);
-  //   --color-modal-background: rgba(255, 255, 255, 0.1);
-  //   --color-view-background: #171717;
-  //   --color-menuitem-background: #222;
-  //   --color-menuitem-background-active: rgb(58, 61, 63);
-  //   --color-checkbox-background: #555;
-  //   --color-tabnavigator-border: #333;
-  // }
+  // DARK THEME
+  &[data-theme='dark'] {
+    // --color-text: #fff;
+    --color-background: #111;
+    // --color-line: #333;
+    // --color-button-background: #333;
+    // --color-button-border: rgba(255, 255, 255, 0.15);
+    // --color-button-noframe: #eee;
+    // --color-button-noframe-background: #333;
+    // --color-button-secondary: #eee;
+    // --color-button-secondary-background: #333;
+    // --color-button-secondary-border: rgba(255, 255, 255, 0.15);
+    // --color-modal-background: rgba(255, 255, 255, 0.1);
+    // --color-view-background: #171717;
+    // --color-menuitem-background: #222;
+    // --color-menuitem-background-active: rgb(58, 61, 63);
+    // --color-checkbox-background: #555;
+    // --color-tabnavigator-border: #333;
+  }
 }
 
 html,
