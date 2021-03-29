@@ -12,6 +12,7 @@ module.exports = withPWA({
     VERSION: packageJson.version,
     ENV: process.env.ENV,
     VERCEL_URL: process.env.VERCEL_URL,
+    VERCEL_GIT_COMMIT_MESSAGE: process.env.VERCEL_GIT_COMMIT_MESSAGE,
   },
 
   webpack: (config, { dev, isServer }) => {

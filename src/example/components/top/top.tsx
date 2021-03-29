@@ -1,3 +1,4 @@
+import { Config } from 'example/config';
 import { useNavigationControllerModal } from 'example/hooks/usenavigationcontrollermodal';
 import { ReactNode, useCallback, useState } from 'react';
 import { useRecoilState } from 'recoil';
@@ -159,6 +160,9 @@ export const Top = () => {
           <a href="https://github.com/nariyu/uikit" target="_blank">
             github.com/nariyu/uikit
           </a>
+        </Row>
+        <Row>
+          <p>{Config.VERCEL_GIT_COMMIT_MESSAGE}</p>
         </Row>
       </div>
     </div>
