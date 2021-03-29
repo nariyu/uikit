@@ -66,17 +66,12 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   font-display: fallback;
 
-  // color: var(--color-text);
-  // background-color: var(--color-background);
-
   -webkit-tap-highlight-color: transparent;
   // font-feature-settings: 'palt' 1;
   -webkit-touch-callout: none;
   user-select: none;
 
   height: 100vh;
-
-  // transition: color 0.2s linear 0s, background-color 0.2s linear 0s;
 
   overflow: hidden;
 }

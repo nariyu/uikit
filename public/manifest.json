@@ -1,6 +1,6 @@
 {
   "name": "UIKit",
-  "short_name": "uikit",
+  "short_name": "UIKit",
   "description": "This is UIKit",
   "start_url": "/",
   "display": "standalone",
