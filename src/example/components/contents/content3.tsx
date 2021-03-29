@@ -1,8 +1,12 @@
+import { ModalContainerContext } from 'example/context/containercontext';
+import { useContext } from 'react';
 import { showActionSheet } from 'shared/components/actionsheet';
 import { Button } from 'shared/components/button';
 import styles from './content.module.scss';
 
 export const Content3 = () => {
+  const modalContainer = useContext(ModalContainerContext);
+
   return (
     <div className={styles.component}>
       <Button
@@ -21,6 +25,9 @@ export const Content3 = () => {
             >
               🥰
             </div>,
+            {
+              container: modalContainer,
+            },
           );
         }}
       >

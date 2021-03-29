@@ -1,3 +1,4 @@
+import { ModalContainerContext } from 'example/context/containercontext';
 import { useNavigationControllerModal } from 'example/hooks/usenavigationcontrollermodal';
 import { useTheme } from 'example/hooks/usetheme';
 import {
@@ -50,6 +51,9 @@ export const MainView = () => {
   const setMenuOpened = useSetRecoilState(menuState);
   const userInfo = useRecoilValue(userInfoState);
 
+  // Modal
+  const navigationModalRef = useRef<HTMLDivElement>(null);
+
   // NavigationController
   const navigationControllerRef = useRef<NavigationControllerHandler>(null);
   const modalNavigationControllerRef = useRef<NavigationControllerHandler>(
@@ -92,74 +96,77 @@ export const MainView = () => {
     <GlobalNavigationControlerContext.Provider
       value={navigationControllerRef.current}
     >
-      <ModalNavigationControllerContext.Provider
-        value={modalNavigationControllerRef.current}
-      >
-        <div className={styles.component}>
-          <Top />
+      <ModalContainerContext.Provider value={navigationModalRef.current}>
+        <ModalNavigationControllerContext.Provider
+          value={modalNavigationControllerRef.current}
+        >
+          <div className={styles.component}>
+            <Top />
 
-          {/* MODAL BACKGROUND */}
-          <div
-            className={styles.navigationControllerModal}
-            aria-hidden={
-              navigationControllerViewIndex === -1 &&
-              !navigationControllerModalInfo.shown
-            }
-            onClick={onClickModalBackground}
-          />
+            {/* MODAL BACKGROUND */}
+            <div
+              className={styles.navigationControllerModal}
+              aria-hidden={
+                navigationControllerViewIndex === -1 &&
+                !navigationControllerModalInfo.shown
+              }
+              onClick={onClickModalBackground}
+            />
 
-          {/* MENU */}
-          <div
-            className={styles.navigationController}
-            aria-hidden={navigationControllerViewIndex === -1}
-          >
-            <NavigationController
-              ref={navigationControllerRef}
-              defaultNoBorder={true}
-              onClose={() => setMenuOpened(false)}
-              onChangeIndex={(index) => {
-                setNavigationControllerViewIndex(index);
-              }}
-            ></NavigationController>
-          </div>
-
-          {/* MODAL NAVIGATION CONTROLLER */}
-          <div
-            className={styles.navigationModal}
-            aria-hidden={!navigationControllerModalInfo.shown}
-          >
-            <NavigationController
-              ref={modalNavigationControllerRef}
-              defaultTitle="NavigationController + Modal"
-              defaultLeftButton="Close"
-              onClickDefaultLeftButton={hideNavigationContollerModal}
+            {/* MENU */}
+            <div
+              className={styles.navigationController}
+              aria-hidden={navigationControllerViewIndex === -1}
             >
-              <TabNavigator
-                items={[
-                  {
-                    title: 'Home',
-                    icon: <Content1Icon />,
-                    selectedIcon: <Content1IconSelected />,
-                    view: <Content1 />,
-                  },
-                  {
-                    title: 'Hello',
-                    icon: <Content2Icon />,
-                    selectedIcon: <Content2IconSelected />,
-                    view: <Content2 />,
-                  },
-                  {
-                    title: 'Wow!',
-                    icon: <Content3Icon />,
-                    selectedIcon: <Content3IconSelected />,
-                    view: <Content3 />,
-                  },
-                ]}
-              />
-            </NavigationController>
+              <NavigationController
+                ref={navigationControllerRef}
+                defaultNoBorder={true}
+                onClose={() => setMenuOpened(false)}
+                onChangeIndex={(index) => {
+                  setNavigationControllerViewIndex(index);
+                }}
+              ></NavigationController>
+            </div>
+
+            {/* MODAL NAVIGATION CONTROLLER */}
+            <div
+              className={styles.navigationModal}
+              aria-hidden={!navigationControllerModalInfo.shown}
+            >
+              <div ref={navigationModalRef} className={styles.modalContainer} />
+              <NavigationController
+                ref={modalNavigationControllerRef}
+                defaultTitle="NavigationController + Modal"
+                defaultLeftButton="Close"
+                onClickDefaultLeftButton={hideNavigationContollerModal}
+              >
+                <TabNavigator
+                  items={[
+                    {
+                      title: 'Home',
+                      icon: <Content1Icon />,
+                      selectedIcon: <Content1IconSelected />,
+                      view: <Content1 />,
+                    },
+                    {
+                      title: 'Hello',
+                      icon: <Content2Icon />,
+                      selectedIcon: <Content2IconSelected />,
+                      view: <Content2 />,
+                    },
+                    {
+                      title: 'Wow!',
+                      icon: <Content3Icon />,
+                      selectedIcon: <Content3IconSelected />,
+                      view: <Content3 />,
+                    },
+                  ]}
+                />
+              </NavigationController>
+            </div>
           </div>
-        </div>
-      </ModalNavigationControllerContext.Provider>
+        </ModalNavigationControllerContext.Provider>
+      </ModalContainerContext.Provider>
     </GlobalNavigationControlerContext.Provider>
   );
 };
