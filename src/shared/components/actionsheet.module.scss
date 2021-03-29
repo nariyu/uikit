@@ -39,10 +39,10 @@
   border-top-right-radius: 0.6rem;
   box-shadow: 0 2px 2rem rgba(#000, 0.7);
   transform: translate(-50%, 0);
-  transition: transform 0.3s var(--ease-back-out) 0s;
+  transition: transform 0.2s ease-out 0s;
   will-change: transform;
 
-  animation: appear-in 0.3s var(--ease-back-out) 0s;
+  animation: appear-in 0.2s ease-out 0s;
 
   &::after {
     content: '';
