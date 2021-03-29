@@ -203,5 +203,11 @@ export const MenuButton = () => {
 
 // バージョン
 const VersionView = () => {
-  return <div className={styles.versionInfo}>Version {Config.VERSION}</div>;
+  return (
+    <div className={styles.versionInfo}>
+      Version {Config.VERSION}
+      <br />
+      Commit {Config.VERCEL_GIT_COMMIT_SHA}
+    </div>
+  );
 };
