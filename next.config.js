@@ -1,8 +1,13 @@
+const withPWA = require('next-pwa');
 const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 const packageJson = require('./package.json');
 
-module.exports = {
+module.exports = withPWA({
+  pwa: {
+    dest: 'public',
+  },
+
   env: {
     VERSION: packageJson.version,
     ENV: process.env.ENV,
@@ -37,4 +42,6 @@ module.exports = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'src/styles')],
   },
-};
+
+  future: { webpack5: true },
+});

@@ -36,3 +36,7 @@ yarn-error.log*
 /serverless.yml
 /.serverless/
 /.serverless_nextjs/
+
+# PWA
+/public/sw.js
+/public/workbox-*.js
