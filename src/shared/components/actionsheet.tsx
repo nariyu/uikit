@@ -84,16 +84,12 @@ export const showActionSheet = (
 ) => {
   options = options || {};
 
-  let global = false;
+  const container = options.container || document.body;
 
-  let container = options.container;
-  if (!container) {
-    container = document.createElement('div');
-    container.className = styles.container;
+  const box = document.createElement('div');
+  box.className = styles.container;
 
-    document.body.appendChild(container);
-    global = true;
-  }
+  container.appendChild(box);
 
   const actionSheetRef = createRef<ActionSheetHandler>();
 
@@ -102,11 +98,11 @@ export const showActionSheet = (
       ref={actionSheetRef}
       title={title}
       onClose={() => {
-        container.classList.add(styles.hidden);
+        box.classList.add(styles.hidden);
         if (global) {
           window.setTimeout(() => {
-            if (container.parentElement) {
-              container.parentElement.removeChild(container);
+            if (box.parentElement) {
+              box.parentElement.removeChild(box);
             }
           }, 500);
         }
@@ -114,7 +110,7 @@ export const showActionSheet = (
     >
       {content}
     </ActionSheet>,
-    container,
+    box,
   );
 
   return () => {
