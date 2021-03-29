@@ -1,11 +1,14 @@
 .component {
   position: fixed;
   top: 0;
-  left: 50%;
+  left: 0;
   bottom: 0;
   width: 100%;
-  transform: translate(-50%, 0);
   overflow: hidden;
+
+  color: var(--color-text);
+  background-color: var(--color-background);
+  transition: color 0.2s linear 0s, background-color 0.2s linear 0s;
 }
 
 .navigationControllerModal {
