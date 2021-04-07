@@ -100,7 +100,7 @@ export const Menu = () => {
               onClick={() => onClickEditButton('phone')}
             />
             <MenuItem
-              title={userInfo.happy ? 'Happy!😍' : 'Happy?'}
+              title={userInfo.happy ? 'Happy! 😍' : 'Happy?'}
               icon={
                 <CheckBox
                   defaultChecked={userInfo.happy}

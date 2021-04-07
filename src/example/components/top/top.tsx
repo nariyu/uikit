@@ -1,5 +1,5 @@
 import { useNavigationControllerModal } from 'example/hooks/usenavigationcontrollermodal';
-import { ReactNode, useCallback, useState } from 'react';
+import { ReactNode, useCallback } from 'react';
 import { useRecoilState } from 'recoil';
 import { showActionSheet } from 'shared/components/actionsheet';
 import { Button } from 'shared/components/button';
@@ -24,7 +24,7 @@ export const Top = () => {
   // モーダルを表示する
   const openModal = useCallback(() => {
     PopupManager.open(
-      <Popup>
+      <Popup onClose={() => NotificationManager.add('Hello!')}>
         <div
           style={{
             width: '17rem',
@@ -80,9 +80,6 @@ export const Top = () => {
   const addNotification = useCallback(() => {
     NotificationManager.add('Yeah!!');
   }, []);
-
-  // ボタン
-  const [buttonSelected, setButtonSelected] = useState(false);
 
   return (
     <div className={styles.component}>
@@ -142,17 +139,6 @@ export const Top = () => {
             checked={theme === 'dark'}
             onChange={(checked) => setTheme(checked ? 'dark' : 'light')}
           />
-        </Row>
-        <Row>
-          <Button
-            aria-selected={buttonSelected}
-            onClick={() => {
-              setButtonSelected(!buttonSelected);
-              NotificationManager.add(buttonSelected ? 'Unselect' : 'Select');
-            }}
-          >
-            {buttonSelected ? 'Toogle: selected' : 'Toggle: not selected'}
-          </Button>
         </Row>
         <Row>
           Source:{' '}
