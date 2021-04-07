@@ -24,7 +24,7 @@ export const Top = () => {
   // モーダルを表示する
   const openModal = useCallback(() => {
     PopupManager.open(
-      <Popup onClose={() => NotificationManager.add('Hello!')}>
+      <Popup>
         <div
           style={{
             width: '17rem',
@@ -51,11 +51,15 @@ export const Top = () => {
           {
             label: 'Tea',
             primary: true,
-            onClick: () => NotificationManager.add('I prefer tea to coffee.'),
+            onClick: () => {
+              NotificationManager.add('I prefer tea to coffee.');
+            },
           },
           {
             label: 'Coffee',
-            onClick: () => NotificationManager.add('I prefer coffee to tea.'),
+            onClick: () => {
+              NotificationManager.add('I prefer coffee to tea.');
+            },
           },
         ]}
       >
