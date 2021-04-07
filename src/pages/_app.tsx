@@ -14,6 +14,11 @@ const App = ({ Component, pageProps }: AppProps) => {
           name="viewport"
           content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
         />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `if(document.documentElement)document.documentElement.setAttribute('data-theme', window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');`,
+          }}
+        ></script>
       </Head>
       <ErrorBoundary>
         <Component {...pageProps} />

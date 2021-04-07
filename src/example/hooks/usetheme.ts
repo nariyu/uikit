@@ -21,13 +21,3 @@ export const useTheme = () => {
 
   return { theme };
 };
-
-// initial
-if (process.browser && document.documentElement) {
-  const theme =
-    window.matchMedia &&
-    window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light';
-  document.documentElement.setAttribute('data-theme', theme);
-}
