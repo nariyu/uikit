@@ -60,7 +60,12 @@ export const CheckBox = forwardRef(
     );
 
     return (
-      <div className={style.component} aria-checked={checked} onClick={onClick}>
+      <div
+        className={style.component}
+        role="switch"
+        aria-checked={checked}
+        onClick={onClick}
+      >
         <div className={style.content}>
           <div className={style.switcher}>
             <div className={style.thumb}></div>

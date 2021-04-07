@@ -1,14 +1,14 @@
 import { HTMLAttributes, ReactNode } from 'react';
 import styles from './button.module.scss';
 
-interface Props extends HTMLAttributes<HTMLDivElement> {
+interface Props extends HTMLAttributes<HTMLButtonElement> {
   children?: ReactNode;
 }
 export const Button = (props: Props) => {
   const { children } = props;
   return (
-    <div className={styles.component} {...props}>
+    <button className={styles.component} {...props}>
       {children}
-    </div>
+    </button>
   );
 };

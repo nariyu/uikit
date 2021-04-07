@@ -58,6 +58,7 @@ export const Popup = (props: Props) => {
   return (
     <div
       className={classNames(style.component, closed ? style.closed : undefined)}
+      role="dialog"
       onClick={(event) => preventDefault(event)}
     >
       <div className={style.content}>{children}</div>
@@ -65,7 +66,7 @@ export const Popup = (props: Props) => {
       <div className={style.footer}>
         {buttons ? (
           buttons.map((button, index) => (
-            <div
+            <button
               key={index}
               className={style.btn}
               data-index={index}
@@ -73,16 +74,16 @@ export const Popup = (props: Props) => {
               onClick={onClickButton}
             >
               {button.label}
-            </div>
+            </button>
           ))
         ) : (
-          <div
+          <button
             className={style.btn}
             data-primary="true"
             onClick={onClickButton}
           >
             OK
-          </div>
+          </button>
         )}
       </div>
     </div>

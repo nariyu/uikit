@@ -230,6 +230,7 @@ export const NavigationController = forwardRef(
               onClickDefaultLeftButton ? (
                 <div
                   className={styles.btn}
+                  role="button"
                   data-position={0 <= selectedIndex ? 'before' : 'current'}
                   onClick={onClickDefaultLeftButton}
                 >
@@ -242,6 +243,7 @@ export const NavigationController = forwardRef(
               viewsRef.current.map((_view, index) => (
                 <div
                   key={index}
+                  role="button"
                   className={classNames(styles.icon, styles.leftArrow)}
                   data-position={
                     index < selectedIndex
@@ -288,7 +290,11 @@ export const NavigationController = forwardRef(
           <div className={styles.right}>
             {viewsRef.current.length === 0 ? (
               onClickDefaultRightButton ? (
-                <div className={styles.btn} onClick={onClickDefaultRightButton}>
+                <div
+                  className={styles.btn}
+                  role="button"
+                  onClick={onClickDefaultRightButton}
+                >
                   {defaultRightButton}
                 </div>
               ) : (
@@ -296,7 +302,11 @@ export const NavigationController = forwardRef(
               )
             ) : selectedIndex >= 0 &&
               viewsRef.current[selectedIndex].rightButton ? (
-              <div className={styles.btn} onClick={onClickRightButton}>
+              <div
+                className={styles.btn}
+                role="button"
+                onClick={onClickRightButton}
+              >
                 {viewsRef.current[selectedIndex].rightButton}
               </div>
             ) : null}

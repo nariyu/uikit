@@ -49,11 +49,16 @@
     border-top: 1px solid var(--color-popup-button-border);
 
     .btn {
+      display: block;
       flex: 1;
       padding: 1rem 0.5rem;
       text-align: center;
       white-space: nowrap;
       cursor: pointer;
+      appearance: none;
+      border: 0;
+      background-color: transparent;
+      outline: none;
 
       color: var(--color-primary);
 

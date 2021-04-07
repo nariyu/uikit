@@ -25,6 +25,7 @@ export const MenuItem = (props: MenuItemProps) => {
     return (
       <a
         className={classNames(styles.component, styles.link)}
+        role="listitem"
         href={href}
         target="_blank"
       >
@@ -48,6 +49,7 @@ export const MenuItem = (props: MenuItemProps) => {
         centered ? styles.centered : undefined,
         onClick ? styles.link : undefined,
       )}
+      role="listitem"
       onClick={onClick}
     >
       <div className={styles.menuItemTitle} style={titleStyle}>

@@ -48,7 +48,7 @@ interface TabGroupProps {
 export const TabGroup = (props: TabGroupProps) => {
   const { items, selectedIndex, onChange } = props;
   return (
-    <div className={styles.tabGroup}>
+    <div className={styles.tabGroup} role="navigation">
       {items.map((item, index) => (
         <Tab
           key={index}
@@ -78,6 +78,7 @@ export const Tab = (props: TabProps) => {
   return (
     <div
       className={styles.tab}
+      role="button"
       aria-selected={selected}
       aria-disabled={disabled}
       aria-label={typeof title === 'string' ? title : accesibilityTitle}
