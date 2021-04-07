@@ -8,6 +8,8 @@
   transform: translate(-50%, -50%);
   overflow: hidden;
 
+  width: calc(var(--max-width) - 10rem);
+
   color: var(--color-text);
   background-color: var(--color-background);
   border-radius: 0.5rem;
@@ -28,7 +30,6 @@
   .content {
     position: relative;
     z-index: 1;
-    width: calc(var(--max-width) - 10rem);
     max-height: 30rem;
     overflow: auto;
     line-height: 1.5;
@@ -45,7 +46,7 @@
     z-index: 2;
     padding: 0;
     display: flex;
-    border-top: 1px solid var(--color-button-border);
+    border-top: 1px solid var(--color-popup-button-border);
 
     .btn {
       flex: 1;
@@ -60,7 +61,7 @@
         font-weight: 800;
       }
       + .btn {
-        border-left: 1px solid var(--color-button-border);
+        border-left: 1px solid var(--color-popup-button-border);
       }
     }
   }

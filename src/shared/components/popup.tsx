@@ -1,6 +1,5 @@
 import { ReactNode, SyntheticEvent, useCallback, useState } from 'react';
 import { classNames, preventDefault } from 'shared/utils/elementutil';
-import { Button } from './button';
 import style from './popup.module.scss';
 import { PopupManager } from './popupmanager';
 
@@ -56,10 +55,6 @@ export const Popup = (props: Props) => {
     [onClose, buttons],
   );
 
-  const hasPrimary = buttons
-    ? !!buttons.find((button) => button.primary)
-    : false;
-
   return (
     <div
       className={classNames(style.component, closed ? style.closed : undefined)}
@@ -74,7 +69,6 @@ export const Popup = (props: Props) => {
               key={index}
               className={style.btn}
               data-index={index}
-              data-secondary={hasPrimary && !button.primary ? true : undefined}
               data-primary={button.primary ? true : undefined}
               onClick={onClickButton}
             >
@@ -82,7 +76,11 @@ export const Popup = (props: Props) => {
             </div>
           ))
         ) : (
-          <div className={style.btn} onClick={onClickButton}>
+          <div
+            className={style.btn}
+            data-primary="true"
+            onClick={onClickButton}
+          >
             OK
           </div>
         )}
