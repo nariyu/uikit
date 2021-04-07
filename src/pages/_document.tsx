@@ -42,16 +42,16 @@ class MyDocument extends Document {
           {/* safari */}
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-status-bar-style" content="#000" />
-          <meta name="apple-mobile-web-app-title" content="UIKit" />
+          <meta name="apple-mobile-web-app-title" content="UI Toolkit" />
           <link
             rel="apple-touch-icon"
             sizes="180x180"
             href="/favicons/apple-touch-icon-180x180.png"
           />
           {/* 一般 */}
-          <meta name="application-name" content="UIKit" />
+          <meta name="application-name" content="UI Toolkit" />
           <meta name="theme-color" content="#000" />
-          <meta name="description" content="This is UIKit" />
+          <meta name="description" content="This is UI Toolkit" />
           <link rel="icon" sizes="192x192" href="/favicons/icon-192x192.png" />
           <link rel="icon" href="/favicons/favicon.ico" />
           <link rel="manifest" href="/manifest.json" />

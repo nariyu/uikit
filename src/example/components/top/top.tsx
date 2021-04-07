@@ -91,7 +91,7 @@ export const Top = () => {
       <div className={styles.title}>
         <div className={styles.titleLeft}></div>
         <div className={styles.titleContent}>
-          <h1 className={styles.appName}>UIKit</h1>
+          <h1 className={styles.appName}>UI Toolkit</h1>
         </div>
         <div className={styles.titleRight}>
           <MenuButton />
@@ -146,8 +146,8 @@ export const Top = () => {
         </Row>
         <Row>
           Source:{' '}
-          <a href="https://github.com/nariyu/uikit" target="_blank">
-            github.com/nariyu/uikit
+          <a href="https://github.com/nariyu/uitoolkit" target="_blank">
+            github.com/nariyu/uitoolkit
           </a>
         </Row>
       </div>

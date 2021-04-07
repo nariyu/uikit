@@ -1,5 +1,5 @@
-# UIKit
+# UI Toolkit
 
-Mobile-first UI Kit for React
+Mobile-first UI toolkit for React
 
-Live Demo: https://uikit.nariyu.jp/
+Live Demo: https://uitoolkit.vercel.app/

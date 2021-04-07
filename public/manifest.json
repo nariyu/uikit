@@ -1,7 +1,7 @@
 {
-  "name": "UIKit",
-  "short_name": "UIKit",
-  "description": "This is UIKit",
+  "name": "UI Toolkit",
+  "short_name": "UI Toolkit",
+  "description": "This is UI Toolkit",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#fff",
