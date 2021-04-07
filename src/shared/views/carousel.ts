@@ -13,10 +13,7 @@ function arrayDiff<T>(a: T[], b: T[]): T[] {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const global: { ___scrollingInstance: any } = process.browser
-  ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (window as any)
-  : {};
+const global: { ___scrollingInstance: any } = window as any;
 
 /**
  * Carousel
@@ -59,6 +56,9 @@ export class Carousel extends EventEmitter<CarouselEventMap> {
 
   private enabledFireEvent = true;
   private updateHandler: () => void;
+  private wheelHandler: (event: WheelEvent) => void;
+  private currEventTarget: HTMLElement;
+  private resizeObserver: ResizeObserver;
 
   private scrollTween?: Tween;
 
@@ -112,6 +112,14 @@ export class Carousel extends EventEmitter<CarouselEventMap> {
     this.scroller.style.position = 'absolute';
     this.scroller.style.overflow = 'visible';
 
+    if (window.ResizeObserver) {
+      const resizeObserver = new ResizeObserver(() => {
+        this.updateSize();
+      });
+      resizeObserver.observe(this.scroller);
+      this.resizeObserver = resizeObserver;
+    }
+
     // indicator
     this.indicator = document.createElement('div');
     this.indicator.classList.add('carousel-indicator');
@@ -130,6 +138,41 @@ export class Carousel extends EventEmitter<CarouselEventMap> {
       this.updateSize();
     };
     window.addEventListener('resize', this.updateHandler);
+
+    this.wheelHandler = (event: WheelEvent) => {
+      if (!this.enabledMouseWheel) return;
+      event.preventDefault();
+      event.stopPropagation();
+      if (!this.enabled) return;
+      if (this.scrollTween) return;
+
+      let delta = this._direction === 'vertical' ? event.deltaY : event.deltaX;
+      if (this._reversed) delta *= -1;
+
+      if (Math.abs(delta) > 3) {
+        // move to next frame
+        let nextFrameIndex = delta > 0 ? this._index + 1 : undefined;
+
+        // move to prev frame
+        if (typeof nextFrameIndex === 'undefined') {
+          nextFrameIndex = this._index - 1;
+        }
+
+        this.setIndicatorVisible(true);
+        this.setIndex(nextFrameIndex, true);
+      }
+    };
+
+    this.setEventTarget(eventTarget);
+  }
+
+  public setEventTarget(eventTarget: HTMLElement) {
+    if (this.touchManager) {
+      this.touchManager.dispose();
+    }
+    if (this.currEventTarget) {
+      this.currEventTarget.removeEventListener('wheel', this.wheelHandler);
+    }
 
     // touch scroll
     const touchManager = (this.touchManager = new TouchManager(eventTarget));
@@ -269,34 +312,11 @@ export class Carousel extends EventEmitter<CarouselEventMap> {
     });
 
     // mousewheel
-    eventTarget.addEventListener(
-      'wheel',
-      (event: WheelEvent) => {
-        if (!this.enabledMouseWheel) return;
-        event.preventDefault();
-        event.stopPropagation();
-        if (!this.enabled) return;
-        if (this.scrollTween) return;
+    eventTarget.addEventListener('wheel', this.wheelHandler, {
+      passive: false,
+    });
 
-        let delta =
-          this._direction === 'vertical' ? event.deltaY : event.deltaX;
-        if (this._reversed) delta *= -1;
-
-        if (Math.abs(delta) > 3) {
-          // move to next frame
-          let nextFrameIndex = delta > 0 ? this._index + 1 : undefined;
-
-          // move to prev frame
-          if (typeof nextFrameIndex === 'undefined') {
-            nextFrameIndex = this._index - 1;
-          }
-
-          this.setIndicatorVisible(true);
-          this.setIndex(nextFrameIndex, true);
-        }
-      },
-      { passive: false },
-    );
+    this.currEventTarget = eventTarget;
   }
 
   /**
@@ -311,7 +331,7 @@ export class Carousel extends EventEmitter<CarouselEventMap> {
         this._direction = 'vertical';
         break;
       default:
-        console.error('setDirection("vertical" || "horizontal")');
+        console.error(`direction invalid value: ${value}`);
         return;
     }
 
@@ -803,6 +823,12 @@ export class Carousel extends EventEmitter<CarouselEventMap> {
     window.removeEventListener('resize', this.updateHandler);
     if (this.touchManager) {
       this.touchManager.dispose();
+    }
+    if (this.currEventTarget) {
+      this.currEventTarget.removeEventListener('wheel', this.wheelHandler);
+    }
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
     }
     if (this.indicator.parentNode) {
       this.indicator.parentNode.removeChild(this.indicator);
