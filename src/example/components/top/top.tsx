@@ -74,7 +74,7 @@ export const Top = () => {
             fontWeight: 600,
           }}
         >
-          Which would you prefer?
+          Which do you prefer?
         </div>
       </Popup>,
     );
