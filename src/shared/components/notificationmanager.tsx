@@ -1,18 +1,31 @@
+import { ReactNode } from 'react';
 import ReactDOM from 'react-dom';
 import { Notification, NotificationType } from './notification';
 import styles from './notificationmanager.module.scss';
 
-let currentNotify: HTMLElement | undefined;
-let currentCloseHandler: (() => void) | undefined;
+type CloseFunction = () => void;
+let currNotify: HTMLElement | undefined;
+let currCloseFunc: CloseFunction | undefined;
 
 export class NotificationManager {
+  /** add notification */
   public static add(
-    text: string,
+    text: ReactNode,
     type = NotificationType.Normal,
     duration = 5000,
   ) {
+    let closeTimer = 0;
+
+    const closeFunc: CloseFunction = () => {
+      if (closeTimer) {
+        window.clearTimeout(closeTimer);
+        closeTimer = 0;
+      }
+      this.close(container);
+    };
+
     const notification = (
-      <Notification type={type} className={styles.notification}>
+      <Notification type={type} onClose={closeFunc}>
         {text}
       </Notification>
     );
@@ -20,37 +33,32 @@ export class NotificationManager {
     const container = document.createElement('div');
     container.className = styles.notifyContainer;
 
-    currentNotify = container;
+    currNotify = container;
 
     document.body.appendChild(container);
 
     ReactDOM.render(notification, container);
 
-    let closeTimer = 0;
-
-    if (currentCloseHandler) {
-      currentCloseHandler();
+    if (currCloseFunc) {
+      currCloseFunc();
     }
-    const close = () => {
-      if (closeTimer) {
-        window.clearTimeout(closeTimer);
-        closeTimer = 0;
-      }
-      this.close(container);
-    };
-    currentCloseHandler = close;
+    currCloseFunc = closeFunc;
+    closeTimer = window.setTimeout(closeFunc, duration);
 
-    closeTimer = window.setTimeout(close, duration);
+    return closeFunc;
   }
 
+  /** close */
   public static close(container: HTMLElement) {
-    container.classList.add(styles.closed);
-    if (currentNotify === container) currentNotify = undefined;
     window.setTimeout(() => {
-      ReactDOM.unmountComponentAtNode(container);
-      if (container.parentNode) {
-        container.parentNode.removeChild(container);
-      }
-    }, 500);
+      container.classList.add(styles.closed);
+      if (currNotify === container) currNotify = undefined;
+      window.setTimeout(() => {
+        ReactDOM.unmountComponentAtNode(container);
+        if (container.parentNode) {
+          container.parentNode.removeChild(container);
+        }
+      }, 500);
+    }, 200);
   }
 }
