@@ -70,18 +70,21 @@ export const Popup = (props: Props) => {
       <div className={style.footer}>
         {buttons ? (
           buttons.map((button, index) => (
-            <Button
+            <div
               key={index}
+              className={style.btn}
               data-index={index}
               data-secondary={hasPrimary && !button.primary ? true : undefined}
               data-primary={button.primary ? true : undefined}
               onClick={onClickButton}
             >
               {button.label}
-            </Button>
+            </div>
           ))
         ) : (
-          <Button onClick={onClickButton}>OK</Button>
+          <div className={style.btn} onClick={onClickButton}>
+            OK
+          </div>
         )}
       </div>
     </div>

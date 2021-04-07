@@ -27,8 +27,8 @@ export const Top = () => {
       <Popup>
         <div
           style={{
-            width: '17rem',
-            height: '7rem',
+            minHeight: '10rem',
+            padding: '3rem',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -65,8 +65,8 @@ export const Top = () => {
       >
         <div
           style={{
-            width: '17rem',
-            height: '7rem',
+            minHeight: '10rem',
+            padding: '3rem',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
