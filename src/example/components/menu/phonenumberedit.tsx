@@ -8,8 +8,8 @@ import {
 } from 'react';
 import { useRecoilState } from 'recoil';
 import { Submittable } from 'shared/components/navigationcontroller';
-import { Popup } from 'shared/components/popup';
-import { PopupManager } from 'shared/components/popupmanager';
+import { NotificationType } from 'shared/components/notification';
+import { NotificationManager } from 'shared/components/notificationmanager';
 import { Spinner } from 'shared/components/spinner';
 import { TextInput, TextInputHandler } from 'shared/components/textinput';
 import { classNames } from 'shared/utils/elementutil';
@@ -59,7 +59,10 @@ export const PhoneNumberEdit = forwardRef(
       new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
         setLoading(false);
         setUserInfo((userInfo) => ({ ...userInfo, phoneNumber }));
-        PopupManager.open(<Popup>Phone number is updated.</Popup>);
+        NotificationManager.add(
+          'Phone number is updated.',
+          NotificationType.Info,
+        );
         onClose();
       });
     }, [onClose]);

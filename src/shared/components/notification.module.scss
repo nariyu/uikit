@@ -22,7 +22,8 @@
   pointer-events: all;
 
   &[data-type='info'] {
-    background-color: rgba(rgb(0, 121, 202), 0.9);
+    color: #fff;
+    background-color: rgba(rgb(72, 182, 255), 0.9);
   }
 
   .content {

@@ -4,6 +4,7 @@ import { useRecoilState } from 'recoil';
 import { showActionSheet } from 'shared/components/actionsheet';
 import { Button } from 'shared/components/button';
 import { CheckBox } from 'shared/components/checkbox';
+import { NotificationType } from 'shared/components/notification';
 import { NotificationManager } from 'shared/components/notificationmanager';
 import { Popup } from 'shared/components/popup';
 import { PopupManager } from 'shared/components/popupmanager';
@@ -80,11 +81,6 @@ export const Top = () => {
     );
   }, []);
 
-  // 通知を表示する
-  const addNotification = useCallback(() => {
-    NotificationManager.add('Yeah!!');
-  }, []);
-
   return (
     <div className={styles.component}>
       {/* HEADER */}
@@ -135,7 +131,22 @@ export const Top = () => {
           <Button onClick={openModal2}>Popup w/ Buttons</Button>
         </Row>
         <Row>
-          <Button onClick={addNotification}>Notification</Button>
+          <Button
+            onClick={() => {
+              NotificationManager.add('Yeah!!');
+            }}
+          >
+            Notification (default)
+          </Button>
+        </Row>
+        <Row>
+          <Button
+            onClick={() => {
+              NotificationManager.add('Hello!', NotificationType.Info);
+            }}
+          >
+            Notification (info)
+          </Button>
         </Row>
         <Row>
           <CheckBox
