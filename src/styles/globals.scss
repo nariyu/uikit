@@ -84,6 +84,10 @@ body {
   height: 100vh;
 
   overflow: hidden;
+
+  color: var(--color-text);
+  background-color: var(--color-background);
+  transition: color 0.2s linear 0s, background-color 0.2s linear 0s;
 }
 
 /* Safari用のハックは、Chromeに適用されないようにする */
