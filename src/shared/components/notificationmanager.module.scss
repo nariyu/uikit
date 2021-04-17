@@ -4,6 +4,7 @@
   top: 0;
   left: 0;
   width: 100%;
+  padding: 1rem;
   pointer-events: none;
 
   &.closed {
@@ -15,10 +16,7 @@
 }
 
 @keyframes disappear {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
+  to {
+    transform: translate(0, -100%);
   }
 }

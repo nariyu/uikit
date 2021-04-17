@@ -34,7 +34,7 @@ export const Notification = (props: NotificationProps) => {
         if (-15 > offsetY) {
           if (onClose) {
             elem.style.transition = 'transform 0.2s ease-out 0s';
-            elem.style.transform = 'translate(0, -100%)';
+            elem.style.transform = 'translate(0, calc(-100% - 2rem))';
             onClose();
           }
         }
