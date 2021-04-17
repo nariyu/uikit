@@ -17,6 +17,18 @@ export const useTheme = () => {
   }, []);
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
+
+    const manifestElem = document.querySelector('link[rel="manifest"]');
+    if (manifestElem) {
+      manifestElem.setAttribute('href', `/manifest-${theme}.json`);
+    }
+    const themeColorElem = document.querySelector('meta[name="theme-color"]');
+    if (themeColorElem) {
+      themeColorElem.setAttribute(
+        'content',
+        theme === 'dark' ? '#000' : '#fff',
+      );
+    }
   }, [theme]);
 
   return { theme };
