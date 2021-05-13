@@ -118,11 +118,6 @@ export const Menu = () => {
               href="https://www.facebook.com/nariyu.jp"
             />
             <MenuItem
-              title="Twitter"
-              info="@nariyu"
-              href="https://www.twitter.com/nariyu"
-            />
-            <MenuItem
               title="Instagram"
               info="nariyu"
               href="https://www.instagram.com/nariyu/"
