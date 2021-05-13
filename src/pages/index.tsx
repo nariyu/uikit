@@ -1,30 +1,29 @@
+import { Config } from 'example/config';
 import Head from 'next/head';
 
-const title = 'UI Toolkit';
-const description = 'UI Toolkit';
-const url = 'https://uitoolkit.vercel.app';
+const { TITLE, DESCRIPTION, URL } = Config;
 
 const Home = () => {
   return (
     <Head>
-      <title>{title}</title>
-      <meta name="description" content={description} />
-      <link rel="canonical" href={url} />
+      <title>{TITLE}</title>
+      <meta name="description" content={DESCRIPTION} />
+      <link rel="canonical" href={URL} />
 
-      <meta property="og:site_name" content={title} />
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
-      <meta property="og:image" content={`${url}/assets/ogp.png`} />
-      <meta property="og:url" content={`${url}/`} />
+      <meta property="og:site_name" content={TITLE} />
+      <meta property="og:title" content={TITLE} />
+      <meta property="og:description" content={DESCRIPTION} />
+      <meta property="og:image" content={`${URL}/assets/ogp.png`} />
+      <meta property="og:url" content={`${URL}/`} />
       <meta property="og:type" content="website" />
       <meta property="og:locale" content="ja_JP" />
 
-      <meta name="twitter:url" content={`${url}/`} />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={`${url}/assets/ogp.png`} />
+      <meta name="twitter:url" content={`${URL}/`} />
+      <meta name="twitter:title" content={TITLE} />
+      <meta name="twitter:description" content={DESCRIPTION} />
+      <meta name="twitter:image" content={`${URL}/assets/ogp.png`} />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:creator" content={title} />
+      <meta name="twitter:creator" content={TITLE} />
     </Head>
   );
 };

@@ -281,3 +281,27 @@ export const canvasToBlob = (canvas: HTMLCanvasElement) => {
     }
   });
 };
+
+// ポスタライズ
+export const posterize = (
+  source: Uint8ClampedArray,
+  dest: Uint8ClampedArray,
+  width: number,
+  height: number,
+  level = 5,
+) => {
+  const n = width * height * 4;
+  const numLevels = clamp(level, 2, 256);
+  const numAreas = 256 / numLevels;
+  const numValues = 256 / (numLevels - 1);
+
+  for (let i = 0; i < n; i += 4) {
+    dest[i] = numValues * ((source[i] / numAreas) >> 0);
+    dest[i + 1] = numValues * ((source[i + 1] / numAreas) >> 0);
+    dest[i + 2] = numValues * ((source[i + 2] / numAreas) >> 0);
+    dest[i + 3] = source[i + 3];
+  }
+};
+function clamp(val: number, min: number, max: number) {
+  return Math.min(max, Math.max(min, val));
+}
