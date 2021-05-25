@@ -1,6 +1,5 @@
+import { Ease, Tween } from 'lib/tween/tween';
 import { useEffect, useState } from 'react';
-
-import { Ease, Tween } from 'shared/tween/tween';
 
 interface Props {
   count: number;

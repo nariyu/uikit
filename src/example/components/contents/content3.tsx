@@ -1,7 +1,7 @@
 import { ModalContainerContext } from 'example/context/containercontext';
+import { showActionSheet } from 'lib/components/actionsheet';
+import { Button } from 'lib/components/button';
 import { useContext } from 'react';
-import { showActionSheet } from 'shared/components/actionsheet';
-import { Button } from 'shared/components/button';
 import styles from './content.module.scss';
 
 export const Content3 = () => {

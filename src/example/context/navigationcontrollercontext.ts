@@ -1,5 +1,5 @@
+import { NavigationControllerHandler } from 'lib/components/navigationcontroller';
 import { createContext } from 'react';
-import { NavigationControllerHandler } from 'shared/components/navigationcontroller';
 
 export const GlobalNavigationControlerContext = createContext<NavigationControllerHandler>(
   undefined,

@@ -1,3 +1,4 @@
+import { classNames, preventDefault } from 'lib/utils/elementutil';
 import {
   forwardRef,
   RefObject,
@@ -8,7 +9,6 @@ import {
   useRef,
   useState,
 } from 'react';
-import { classNames, preventDefault } from 'shared/utils/elementutil';
 
 import styles from './textinput.module.scss';
 

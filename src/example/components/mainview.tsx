@@ -2,6 +2,12 @@ import { ModalContainerContext } from 'example/context/containercontext';
 import { useNavigationControllerModal } from 'example/hooks/usenavigationcontrollermodal';
 import { useTheme } from 'example/hooks/usetheme';
 import {
+  NavigationController,
+  NavigationControllerHandler,
+} from 'lib/components/navigationcontroller';
+import { TabNavigator } from 'lib/components/tabnavigator';
+import { preventDefault } from 'lib/utils/elementutil';
+import {
   useCallback,
   useEffect,
   useRef,
@@ -10,12 +16,6 @@ import {
   useContext,
 } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import {
-  NavigationController,
-  NavigationControllerHandler,
-} from 'shared/components/navigationcontroller';
-import { TabNavigator } from 'shared/components/tabnavigator';
-import { preventDefault } from 'shared/utils/elementutil';
 import {
   GlobalNavigationControlerContext,
   ModalNavigationControllerContext,

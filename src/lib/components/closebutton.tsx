@@ -1,5 +1,5 @@
+import { classNames } from 'lib/utils/elementutil';
 import { HTMLAttributes } from 'react';
-import { classNames } from 'shared/utils/elementutil';
 import styles from './closebutton.module.scss';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {

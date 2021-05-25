@@ -1,5 +1,5 @@
+import { preventDefault } from 'lib/utils/elementutil';
 import ReactDOM from 'react-dom';
-import { preventDefault } from 'shared/utils/elementutil';
 import styles from './popupmanager.module.scss';
 
 export class PopupManager {

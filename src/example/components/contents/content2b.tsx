@@ -1,5 +1,5 @@
+import { Button } from 'lib/components/button';
 import { useCallback, useContext } from 'react';
-import { Button } from 'shared/components/button';
 import { ModalNavigationControllerContext } from '../../context/navigationcontrollercontext';
 import styles from './content2b.module.scss';
 import { Content2CContent, Content2CTitle } from './content2c';

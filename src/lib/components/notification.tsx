@@ -1,6 +1,6 @@
+import { TouchManager } from 'lib/managers/touchmanager';
+import { classNames } from 'lib/utils/elementutil';
 import { ReactNode, useEffect, useRef } from 'react';
-import { TouchManager } from 'shared/managers/touchmanager';
-import { classNames } from 'shared/utils/elementutil';
 import styles from './notification.module.scss';
 
 export enum NotificationType {

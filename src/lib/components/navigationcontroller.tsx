@@ -1,4 +1,5 @@
 import { ChevronLeft } from '@styled-icons/heroicons-outline';
+import { classNames, preventDefault } from 'lib/utils/elementutil';
 import {
   forwardRef,
   ReactNode,
@@ -10,8 +11,6 @@ import {
   useRef,
   useState,
 } from 'react';
-import { classNames, preventDefault } from 'shared/utils/elementutil';
-
 import styles from './navigationcontroller.module.scss';
 
 interface Props {

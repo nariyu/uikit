@@ -1,5 +1,5 @@
+import { classNames, preventDefault } from 'lib/utils/elementutil';
 import { ReactNode, SyntheticEvent, useCallback, useState } from 'react';
-import { classNames, preventDefault } from 'shared/utils/elementutil';
 import style from './popup.module.scss';
 import { PopupManager } from './popupmanager';
 

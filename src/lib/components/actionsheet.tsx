@@ -1,3 +1,4 @@
+import { preventDefault } from 'lib/utils/elementutil';
 import {
   createRef,
   forwardRef,
@@ -9,7 +10,6 @@ import {
   useState,
 } from 'react';
 import ReactDOM from 'react-dom';
-import { preventDefault } from 'shared/utils/elementutil';
 import styles from './actionsheet.module.scss';
 
 interface Props {

@@ -1,3 +1,9 @@
+import { Submittable } from 'lib/components/navigationcontroller';
+import { NotificationType } from 'lib/components/notification';
+import { NotificationManager } from 'lib/components/notificationmanager';
+import { Spinner } from 'lib/components/spinner';
+import { TextInput, TextInputHandler } from 'lib/components/textinput';
+import { classNames } from 'lib/utils/elementutil';
 import {
   forwardRef,
   RefObject,
@@ -7,12 +13,6 @@ import {
   useState,
 } from 'react';
 import { useRecoilState } from 'recoil';
-import { Submittable } from 'shared/components/navigationcontroller';
-import { NotificationType } from 'shared/components/notification';
-import { NotificationManager } from 'shared/components/notificationmanager';
-import { Spinner } from 'shared/components/spinner';
-import { TextInput, TextInputHandler } from 'shared/components/textinput';
-import { classNames } from 'shared/utils/elementutil';
 import { userInfoState } from '../../states/userinfostate';
 import { validateEmail } from '../../validators';
 import styles from './editpage.module.scss';

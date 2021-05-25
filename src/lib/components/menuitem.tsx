@@ -2,8 +2,8 @@ import {
   ExternalLink as ExternalLinkIcon,
   ChevronRight,
 } from '@styled-icons/heroicons-outline';
+import { classNames } from 'lib/utils/elementutil';
 import { CSSProperties, ReactNode } from 'react';
-import { classNames } from 'shared/utils/elementutil';
 import styles from './menuitem.module.scss';
 
 /**

@@ -1,7 +1,7 @@
 import { ModalNavigationControllerContext } from 'example/context/navigationcontrollercontext';
+import { Button } from 'lib/components/button';
+import { preventDefault } from 'lib/utils/elementutil';
 import { SyntheticEvent, useCallback, useContext } from 'react';
-import { Button } from 'shared/components/button';
-import { preventDefault } from 'shared/utils/elementutil';
 import styles from './content.module.scss';
 import { Content2BContent, Content2BTitle } from './content2b';
 
