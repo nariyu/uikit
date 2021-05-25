@@ -8,8 +8,8 @@
 
   width: calc(var(--max-width) - 10rem);
 
-  color: var(--color-text);
-  background-color: var(--color-background);
+  color: var(--popup-text-color);
+  background-color: var(--popup-background-color);
   border-radius: 0.5rem;
   box-shadow: 0 2px 2rem rgba(#000, 0.5);
 
@@ -44,7 +44,7 @@
     z-index: 2;
     padding: 0;
     display: flex;
-    border-top: 1px solid var(--color-popup-button-border);
+    border-top: 1px solid var(--popup-button-border-color);
 
     .btn {
       display: block;
@@ -58,13 +58,13 @@
       background-color: transparent;
       outline: none;
 
-      color: var(--color-primary);
+      color: var(--primary-color);
 
       &[data-primary='true'] {
         font-weight: 800;
       }
       + .btn {
-        border-left: 1px solid var(--color-popup-button-border);
+        border-left: 1px solid var(--popup-button-border-color);
       }
     }
   }

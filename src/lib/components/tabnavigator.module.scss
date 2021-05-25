@@ -9,7 +9,7 @@
   .viewstack {
     position: relative;
     flex: 1;
-    background-color: var(--color-view-background);
+    background-color: var(--tabnavigator-background-color);
     .view {
       position: absolute;
       top: 0;
@@ -36,8 +36,8 @@
     align-items: center;
     justify-content: space-around;
     padding: 0.5rem;
-    background-color: var(--color-background);
-    border-top: 1px solid var(--color-tabnavigator-border);
+    background-color: var(--tabnavigator-tabgroup-background-color);
+    border-top: 1px solid var(--tabnavigator-tabgroup-border-color);
     overflow: hidden;
 
     .tab {

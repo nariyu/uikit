@@ -11,7 +11,7 @@
   position: relative;
   margin: 1rem -1.5rem 2rem;
   padding: 0.5rem 1.5rem;
-  background-color: var(--color-menuitem-background);
+  background-color: var(--menuitem-background-color);
 
   &.hbox {
     display: flex;
@@ -117,7 +117,7 @@
 
 .menuSection {
   margin: 2rem -1.5rem;
-  border-top: 1px solid var(--color-line);
+  border-top: 1px solid var(--line-color);
 
   &.del {
     margin-top: 4rem;
@@ -131,7 +131,7 @@
   padding: 1rem 0.7rem 1rem 1rem;
   line-height: 1;
   background-color: #fff;
-  border-bottom: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--line-color);
   user-select: none;
   text-decoration: none;
   color: inherit;
@@ -150,7 +150,7 @@
   }
   .menuItemInfo,
   .menuItemMark {
-    color: var(--color-text-blue);
+    color: var(--text-color-blue);
     font-size: 1rem;
   }
   .menuItemInfo {

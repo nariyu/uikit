@@ -2,36 +2,55 @@
   --max-width: 430px;
   --header-height: 3.5rem;
 
-  --color-text: #111;
-  --color-background: #fff;
+  --text-color: #111;
+  --text-color-blue: rgb(112, 189, 240);
 
-  --color-primary: rgb(0, 124, 226);
+  --background-color: #fff;
 
-  --color-gray-1: rgb(79, 86, 92);
-  --color-menu-title: rgb(157, 171, 180);
-  --color-line: rgb(228, 234, 238);
-  --color-text-blue: rgb(112, 189, 240);
-  --color-link: rgb(79, 138, 255);
+  --primary-color: rgb(0, 124, 226);
 
-  --color-button-background: #222;
-  --color-button-border: rgba(0, 0, 0, 0.5);
-  --color-button-noframe: #111;
-  --color-button-noframe-background: #fff;
-  --color-button-secondary: #111;
-  --color-button-secondary-background: #fff;
-  --color-button-secondary-border: rgba(0, 0, 0, 0.3);
-  --color-modal-background: rgba(0, 0, 0, 0.2);
-  --color-view-background: rgb(243, 244, 245);
-  --color-menuitem-background: var(--color-background);
-  --color-menuitem-background-active: rgb(230, 236, 240);
-  --color-checkbox-background: #ddd;
-  --color-tabnavigator-border: #ddd;
-  --color-closebutton-background: rgba(0, 0, 0, 0.4);
-  --color-popup-button-border: rgba(0, 0, 0, 0.2);
-  --color-notification-text: #000;
-  --color-notification-background: rgba(255, 255, 255, 0.9);
-  --color-notification-border: rgba(0, 0, 0, 0.2);
-  --color-notification-shadow: rgba(0, 0, 0, 0.3);
+  --line-color: rgb(228, 234, 238);
+
+  --link-color: rgb(79, 138, 255);
+
+  --spinner-color: rgb(38, 153, 230);
+
+  --button-background-color: #222;
+  --button-border-color: rgba(0, 0, 0, 0.5);
+  --button-noframe-color: #111;
+  --button-noframe-background-color: #fff;
+  --button-secondary-color: #111;
+  --button-secondary-background-color: #fff;
+  --button-secondary-border-color: rgba(0, 0, 0, 0.3);
+
+  --modal-background-color: rgba(0, 0, 0, 0.2);
+
+  --view-background-color: rgb(243, 244, 245);
+
+  --menu-title-color: rgb(157, 171, 180);
+  --menuitem-background-color: var(--color-background);
+  --menuitem-background-active-color: rgb(230, 236, 240);
+
+  --actionsheet-text-color: var(--text-color);
+  --actionsheet-background-color: var(--background-color);
+
+  --popup-text-color: var(--text-color);
+  --popup-background-color: var(--background-color);
+
+  --checkbox-background-color: #ddd;
+
+  --tabnavigator-background-color: var(--view-background-color);
+  --tabnavigator-tabgroup-background-color: var(--background-color);
+  --tabnavigator-tabgroup-border-color: #ddd;
+
+  --closebutton-background-color: rgba(0, 0, 0, 0.4);
+
+  --popup-button-border-color: rgba(0, 0, 0, 0.2);
+
+  --notification-text-color: #000;
+  --notification-background-color: rgba(255, 255, 255, 0.9);
+  --notification-border-color: rgba(0, 0, 0, 0.2);
+  --notification-shadow-color: rgba(0, 0, 0, 0.3);
 
   // ANIMATION
   --ease-back-in: cubic-bezier(0.59, -0.21, 0.84, 0.58);
@@ -39,27 +58,36 @@
 
   // DARK THEME
   &[data-theme='dark'] {
-    --color-text: #fff;
-    --color-background: #000;
-    --color-line: #333;
-    --color-button-background: #333;
-    --color-button-border: rgba(255, 255, 255, 0.15);
-    --color-button-noframe: #eee;
-    --color-button-noframe-background: #333;
-    --color-button-secondary: #eee;
-    --color-button-secondary-background: #333;
-    --color-button-secondary-border: rgba(255, 255, 255, 0.15);
-    --color-modal-background: rgba(255, 255, 255, 0.1);
-    --color-view-background: #171717;
-    --color-menuitem-background: #222;
-    --color-menuitem-background-active: rgb(58, 61, 63);
-    --color-checkbox-background: #555;
-    --color-tabnavigator-border: #333;
-    --color-popup-button-border: rgba(255, 255, 255, 0.15);
-    --color-notification-text: #fff;
-    --color-notification-background: rgba(32, 32, 32, 0.9);
-    --color-notification-border: rgba(255, 255, 255, 0.2);
-    --color-notification-shadow: rgba(255, 255, 255, 0);
+    --text-color: #fff;
+    --background-color: #000;
+
+    --line-color: #333;
+
+    --button-background-color: #333;
+    --button-border-color: rgba(255, 255, 255, 0.15);
+    --button-noframe-color: #eee;
+    --button-noframe-background-color: #333;
+    --button-secondary-color: #eee;
+    --button-secondary-background-color: #333;
+    --button-secondary-border-color: rgba(255, 255, 255, 0.15);
+
+    --modal-background-color: rgba(255, 255, 255, 0.1);
+
+    --view-background-color: #171717;
+
+    --menuitem-background-color: #222;
+    --menuitem-background-active-color: rgb(58, 61, 63);
+
+    --checkbox-background-color: #555;
+
+    --tabnavigator-border-color: #333;
+
+    --popup-button-border-color: rgba(255, 255, 255, 0.15);
+
+    --notification-text-color: #fff;
+    --notification-background-color: rgba(32, 32, 32, 0.9);
+    --notification-border-color: rgba(255, 255, 255, 0.2);
+    --notification-shadow-color: rgba(255, 255, 255, 0);
   }
 }
 
@@ -70,8 +98,8 @@ body {
 }
 html {
   font-size: 14px;
-  color: var(--color-text);
-  background-color: var(--color-background);
+  color: var(--text-color);
+  background-color: var(--background-color);
   transition: color 0.2s linear 0s, background-color 0.2s linear 0s;
 }
 body {

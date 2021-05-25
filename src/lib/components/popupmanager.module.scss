@@ -5,7 +5,7 @@
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: var(--color-modal-background);
+  background-color: var(--modal-background-color);
   animation: fade-in 0.15s ease-out 0s forwards;
   > * {
     position: absolute;

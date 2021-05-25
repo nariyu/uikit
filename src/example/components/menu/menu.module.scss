@@ -9,7 +9,7 @@
 }
 
 .section {
-  border-bottom: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--line-color);
   position: relative;
   margin: 0 0 3rem;
 
@@ -23,7 +23,7 @@
   padding: 0.5rem 0.7rem 0.5rem 1rem;
   font-size: 1.2rem;
   font-weight: 600;
-  color: var(--color-menu-title);
+  color: var(--menu-title-color);
 }
 
 .menuItem {
@@ -34,7 +34,7 @@
   padding: 1rem 0.7rem 1rem 1rem;
   line-height: 1;
   background-color: #fff;
-  border-top: 1px solid var(--color-line);
+  border-top: 1px solid var(--line-color);
   user-select: none;
   text-decoration: none;
   color: inherit;
@@ -53,7 +53,7 @@
   }
   .menuItemInfo,
   .menuItemIcon {
-    color: var(--color-text-blue);
+    color: var(--text-color-blue);
     font-size: 1rem;
   }
   .menuItemInfo {
@@ -115,5 +115,5 @@
   margin: 1rem 0 4rem;
   text-align: center;
   font-size: 0.85rem;
-  color: var(--color-menu-title);
+  color: var(--menu-color-title);
 }

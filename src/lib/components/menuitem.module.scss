@@ -6,8 +6,8 @@
   padding: 1rem 0.7rem 1rem 1rem;
   line-height: 1;
 
-  background-color: var(--color-menuitem-background);
-  border-top: 1px solid var(--color-line);
+  background-color: var(--menuitem-background-color);
+  border-top: 1px solid var(--line-color);
   user-select: none;
   text-decoration: none;
   color: inherit;
@@ -15,7 +15,7 @@
   &.link {
     cursor: pointer;
     &:active {
-      background-color: var(--color-menuitem-background-active);
+      background-color: var(--menuitem-background-active-color);
     }
   }
 
@@ -26,7 +26,7 @@
   }
   .menuItemInfo,
   .menuItemIcon {
-    color: var(--color-text-blue);
+    color: var(--text-color-blue);
     font-size: 1rem;
   }
   .menuItemInfo {
@@ -52,6 +52,6 @@
   }
 
   &:last-child {
-    border-bottom: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--line-color);
   }
 }

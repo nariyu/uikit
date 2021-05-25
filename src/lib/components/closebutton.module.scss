@@ -24,7 +24,7 @@
   }
 
   &[data-color='white'] {
-    background-color: var(--color-background);
+    background-color: var(--background-color);
     &::before,
     &::after {
       background-color: #7f7d82;

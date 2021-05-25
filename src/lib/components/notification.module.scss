@@ -10,10 +10,10 @@
 
   backdrop-filter: blur(2px);
 
-  color: var(--color-notification-text);
-  background-color: var(--color-notification-background);
-  // border: 1px solid var(--color-notification-border);
-  box-shadow: 0 0 4px var(--color-notification-shadow);
+  color: var(--notification-text-color);
+  background-color: var(--notification-background-color);
+  // border: 1px solid var(--notification-border-color);
+  box-shadow: 0 0 4px var(--notification-shadow-color);
   border-radius: 0.7rem;
 
   animation: appear 0.2s ease-out 0s;

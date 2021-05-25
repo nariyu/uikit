@@ -17,8 +17,8 @@
   text-align: center;
   text-decoration: none;
 
-  background: var(--color-button-background);
-  border: 1px solid var(--color-button-border);
+  background: var(--button-background-color);
+  border: 1px solid var(--button-border-color);
   border-radius: 0.3em;
   box-shadow: 0 1px 3px rgba(#000, 0.4);
 
@@ -35,8 +35,8 @@
   }
 
   &[data-noframe] {
-    color: var(--color-button-noframe);
-    background: var(--color-button-noframe-background);
+    color: var(--button-noframe-color);
+    background: var(--button-noframe-background-color);
     border: 1px solid rgba(#000, 0);
     box-shadow: none;
   }
@@ -46,9 +46,9 @@
     box-shadow: none;
   }
   &[data-secondary] {
-    color: var(--color-button-secondary);
-    background: var(--color-button-secondary-background);
-    border: 1px solid var(--color-button-secondary-border);
+    color: var(--button-secondary-color);
+    background: var(--button-secondary-background-color);
+    border: 1px solid var(--button-secondary-border-color);
     box-shadow: none;
   }
   &[data-warn] {
