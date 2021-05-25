@@ -164,7 +164,7 @@
     overflow: auto;
     transition: transform 0.2s ease-out 0s;
 
-    background-color: var(-view-background);
+    background-color: var(--view-background-color);
 
     transform: translate3d(0, 0, 0);
     animation: content-appear 0.2s ease-out 0s;
